@@ -1,0 +1,139 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.12.0.0
+Copyright (C) 2014 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Terry O'Neill, University of California Davis, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.12.0.0
+Toolchain Path:  C:\Program Files (x86)\Keil\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.05 (build 41)
+Assembler:       Armasm.exe V5.05 (build 41)
+Linker/Locator:  ArmLink.exe V5.05 (build 41)
+Library Manager: ArmAr.exe V5.05 (build 41)
+Hex Converter:   FromElf.exe V5.05 (build 41)
+CPU DLL:         SARMCM3.DLL V5.12.0.0
+Dialog DLL:      DCM.DLL V1.13.0.0
+Target DLL:      CMSIS_AGDI.dll V1.19.0.0
+Dialog DLL:      TCM.DLL V1.14.2.0
+ 
+<h2>Project:</h2>
+C:\Users\terry\Calbee Development\Lab1 Shell\spi_oled.uvproj
+Project File Date:  04/01/2015
+
+<h2>Output:</h2>
+Build target 'Target 1'
+creating preprocessor file for system_mb9abxxx.c...
+compiling system_mb9abxxx.c...
+creating preprocessor file for exint.c...
+compiling exint.c...
+creating preprocessor file for mfs.c...
+compiling mfs.c...
+creating preprocessor file for mfs_hl.c...
+compiling mfs_hl.c...
+creating preprocessor file for interrupts.c...
+compiling interrupts.c...
+creating preprocessor file for pdl.c...
+compiling pdl.c...
+creating preprocessor file for WyzBee_gpio.c...
+compiling WyzBee_gpio.c...
+creating preprocessor file for clk.c...
+compiling clk.c...
+creating preprocessor file for reset.c...
+compiling reset.c...
+creating preprocessor file for main.cpp...
+.\lib\inc\WyzBee.h(48): warning:  #47-D: incompatible redefinition of macro "TRUE" (declared at line 66 of ".\common\base_types.h")
+  #define TRUE                          1u                                              // True
+.\lib\inc\WyzBee.h(49): warning:  #47-D: incompatible redefinition of macro "FALSE" (declared at line 71 of ".\common\base_types.h")
+  #define FALSE                         0u                                              // False
+main.cpp(73): warning:  #1-D: last line of file ends without a newline
+   */
+main.cpp: 3 warnings, 0 errors
+compiling main.cpp...
+.\WyzBee_oled\Adafruit_SSD1351.h(92): warning:  #1300-D: drawPixel inherits implicit virtual
+    void drawPixel(int16_t x, int16_t y, uint16_t color);
+.\WyzBee_oled\Adafruit_SSD1351.h(94): warning:  #1300-D: drawFastHLine inherits implicit virtual
+    void drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color);
+.\WyzBee_oled\Adafruit_SSD1351.h(95): warning:  #1300-D: drawFastVLine inherits implicit virtual
+    void drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color);
+.\WyzBee_oled\Adafruit_SSD1351.h(96): warning:  #1300-D: fillScreen inherits implicit virtual
+    void fillScreen(uint16_t fillcolor);
+.\WyzBee_oled\Adafruit_SSD1351.h(93): warning:  #997-D: function "Adafruit_GFX::fillRect(std::int16_t, std::int16_t, std::int16_t, std::int16_t, std::uint16_t)" is hidden by "Adafruit_SSD1351::fillRect" -- virtual function override intended?
+    void fillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color);
+.\lib\inc\WyzBee.h(48): warning:  #47-D: incompatible redefinition of macro "TRUE" (declared at line 66 of ".\common\base_types.h")
+  #define TRUE                          1u                                              // True
+.\lib\inc\WyzBee.h(49): warning:  #47-D: incompatible redefinition of macro "FALSE" (declared at line 71 of ".\common\base_types.h")
+  #define FALSE                         0u                                              // False
+main.cpp(73): warning:  #1-D: last line of file ends without a newline
+   */
+main.cpp: 8 warnings, 0 errors
+creating preprocessor file for WyzBee_spi.c...
+.\lib\inc\WyzBee.h(48): warning:  #47-D: incompatible redefinition of macro "TRUE" (declared at line 66 of ".\common\base_types.h")
+  #define TRUE                          1u                                              // True
+.\lib\inc\WyzBee.h(49): warning:  #47-D: incompatible redefinition of macro "FALSE" (declared at line 71 of ".\common\base_types.h")
+  #define FALSE                         0u                                              // False
+WyzBee_SPI\WyzBee_spi.c: 2 warnings, 0 errors
+compiling WyzBee_spi.c...
+.\lib\inc\WyzBee.h(48): warning:  #47-D: incompatible redefinition of macro "TRUE" (declared at line 66 of ".\common\base_types.h")
+  #define TRUE                          1u                                              // True
+.\lib\inc\WyzBee.h(49): warning:  #47-D: incompatible redefinition of macro "FALSE" (declared at line 71 of ".\common\base_types.h")
+  #define FALSE                         0u                                              // False
+WyzBee_SPI\WyzBee_spi.c(112): warning:  #223-D: function "memset" declared implicitly
+                memset(&config_internal,0,sizeof(stc_mfs_csio_config_t));       // Clear the local structure variable
+WyzBee_SPI\WyzBee_spi.c(148): warning:  #167-D: argument of type "WyzBeeSpi_TxIsrCallBack_t" is incompatible with parameter of type "mfs_tx_cb_func_ptr_t"
+                Mfs_SetTxIntCallBack(SPI_INSTANCE, p_config->TxIsr);            // Register the TX call back
+WyzBee_SPI\WyzBee_spi.c(149): warning:  #167-D: argument of type "WyzBeeSpi_RxIsrCallBack_t" is incompatible with parameter of type "mfs_rx_cb_func_ptr_t"
+                Mfs_SetRxIntCallBack(SPI_INSTANCE, p_config->RxIsr);            // Register the RX call back
+WyzBee_SPI\WyzBee_spi.c: 5 warnings, 0 errors
+creating preprocessor file for Adafruit_SSD1351.cpp...
+.\lib\inc\WyzBee.h(48): warning:  #47-D: incompatible redefinition of macro "TRUE" (declared at line 66 of ".\common\base_types.h")
+  #define TRUE                          1u                                              // True
+.\lib\inc\WyzBee.h(49): warning:  #47-D: incompatible redefinition of macro "FALSE" (declared at line 71 of ".\common\base_types.h")
+  #define FALSE                         0u                                              // False
+WyzBee_oled\Adafruit_SSD1351.cpp: 2 warnings, 0 errors
+compiling Adafruit_SSD1351.cpp...
+WyzBee_oled\Adafruit_SSD1351.h(92): warning:  #1300-D: drawPixel inherits implicit virtual
+    void drawPixel(int16_t x, int16_t y, uint16_t color);
+WyzBee_oled\Adafruit_SSD1351.h(94): warning:  #1300-D: drawFastHLine inherits implicit virtual
+    void drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color);
+WyzBee_oled\Adafruit_SSD1351.h(95): warning:  #1300-D: drawFastVLine inherits implicit virtual
+    void drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color);
+WyzBee_oled\Adafruit_SSD1351.h(96): warning:  #1300-D: fillScreen inherits implicit virtual
+    void fillScreen(uint16_t fillcolor);
+WyzBee_oled\Adafruit_SSD1351.h(93): warning:  #997-D: function "Adafruit_GFX::fillRect(std::int16_t, std::int16_t, std::int16_t, std::int16_t, std::uint16_t)" is hidden by "Adafruit_SSD1351::fillRect" -- virtual function override intended?
+    void fillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color);
+.\lib\inc\WyzBee.h(48): warning:  #47-D: incompatible redefinition of macro "TRUE" (declared at line 66 of ".\common\base_types.h")
+  #define TRUE                          1u                                              // True
+.\lib\inc\WyzBee.h(49): warning:  #47-D: incompatible redefinition of macro "FALSE" (declared at line 71 of ".\common\base_types.h")
+  #define FALSE                         0u                                              // False
+WyzBee_oled\Adafruit_SSD1351.cpp: 7 warnings, 0 errors
+creating preprocessor file for glcdfont.c...
+compiling glcdfont.c...
+WyzBee_oled\glcdfont.c(13): warning:  #177-D: variable "font" was declared but never referenced
+  static const unsigned char font[] PROGMEM = {
+WyzBee_oled\glcdfont.c: 1 warning, 0 errors
+creating preprocessor file for SPI_OLED.cpp...
+compiling SPI_OLED.cpp...
+creating preprocessor file for Adafruit_GFX.cpp...
+compiling Adafruit_GFX.cpp...
+creating preprocessor file for WyzBee_i2c.c...
+compiling WyzBee_i2c.c...
+WyzBee_i2c\WyzBee_i2c.c(118): warning:  #223-D: function "memset" declared implicitly
+                memset(&config_internal , 0 , sizeof(stc_mfs_i2c_config_t));
+WyzBee_i2c\WyzBee_i2c.c(138): warning:  #167-D: argument of type "void (*)(void)" is incompatible with parameter of type "mfs_tx_cb_func_ptr_t"
+                        Mfs_SetTxIntCallBack (I2C_INSTANCE , WyzBeeI2c_TxIsr   );       // Register I2c TX ISR
+WyzBee_i2c\WyzBee_i2c.c(139): warning:  #167-D: argument of type "void (*)(void)" is incompatible with parameter of type "mfs_rx_cb_func_ptr_t"
+                        Mfs_SetRxIntCallBack (I2C_INSTANCE , WyzBeeI2c_RxIsr   );       // Register I2c RX ISR
+WyzBee_i2c\WyzBee_i2c.c(140): warning:  #167-D: argument of type "void (*)(void)" is incompatible with parameter of type "mfs_sts_cb_func_ptr_t"
+                        Mfs_SetStsIntCallBack(I2C_INSTANCE , WyzBeeI2c_SatusIsr);       // Register I2c Status ISR
+WyzBee_i2c\WyzBee_i2c.c(456): warning:  #223-D: function "memset" declared implicitly
+        memset(&unSSR, 0, sizeof(unSSR));
+WyzBee_i2c\WyzBee_i2c.c(560): warning:  #223-D: function "memset" declared implicitly
+        memset(&unSSR, 0, sizeof(unSSR));
+WyzBee_i2c\WyzBee_i2c.c: 6 warnings, 0 errors
+linking...
+Program Size: Code=14486 RO-data=2054 RW-data=52 ZI-data=676  
+".\spi_oled.axf" - 0 Error(s), 34 Warning(s).
