@@ -1,0 +1,75 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.12.0.0
+Copyright (C) 2014 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Jonathan Tao, UC Davis, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.12.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.05 (build 41)
+Assembler:       Armasm.exe V5.05 (build 41)
+Linker/Locator:  ArmLink.exe V5.05 (build 41)
+Library Manager: ArmAr.exe V5.05 (build 41)
+Hex Converter:   FromElf.exe V5.05 (build 41)
+CPU DLL:         SARMCM3.DLL V5.12.0.0
+Dialog DLL:      DCM.DLL V1.13.0.0
+Target DLL:      CMSIS_AGDI.dll V1.19.0.0
+Dialog DLL:      TCM.DLL V1.14.2.0
+ 
+<h2>Project:</h2>
+C:\Users\Jonathan\Documents\current\EEC172\Lab_1_Tao_Gibson\lab1.uvproj
+Project File Date:  04/02/2015
+
+<h2>Output:</h2>
+Build target 'Target 1'
+".\Lab1.axf" - 0 Error(s), 0 Warning(s).
+Load "C:\\Users\\Jonathan\\Documents\\current\\EEC172\\Lab_1_Tao_Gibson\\Lab1.axf" 
+RDDI-DAP Error
+Error: Flash Download failed  -  Target DLL has been cancelled
+Load "C:\\Users\\Jonathan\\Documents\\current\\EEC172\\Lab_1_Tao_Gibson\\Lab1.axf" 
+RDDI-DAP Error
+Error: Flash Download failed  -  Target DLL has been cancelled
+Load "C:\\Users\\Jonathan\\Documents\\current\\EEC172\\Lab_1_Tao_Gibson\\Lab1.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+</pre>
+</body>
+</html>
+16_t y, int16_t h, uint16_t color);
+.\WyzBee_oled\Adafruit_SSD1351.h(96): warning:  #1300-D: fillScreen inherits implicit virtual
+    void fillScreen(uint16_t fillcolor);
+.\WyzBee_oled\Adafruit_SSD1351.h(93): warning:  #997-D: function "Adafruit_GFX::fillRect(std::int16_t, std::int16_t, std::int16_t, std::int16_t, std::uint16_t)" is hidden by "Adafruit_SSD1351::fillRect" -- virtual function override intended?
+    void fillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color);
+main.cpp(181): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+                                humidity = ((125.0 * (float)raw_humidity) / 65536.0) - 6.0;
+main.cpp(205): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+                                temperature = (175.72 * (float)raw_temperature) / 65536.0 - 46.85;
+main.cpp(246): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+                                if(accel_x >= 0.0)
+main.cpp(254): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+                                        if(accel_x < 0.0)
+main.cpp(265): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+                                if(accel_y >= 0.0)
+main.cpp(273): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+                                        if(accel_y < 0.0)
+main.cpp(284): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+                                if(accel_z >= 0.0)
+main.cpp(292): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+                                        if(accel_z < 0.0)
+main.cpp(303): warning:  #111-D: statement is unreachable
+        return 0;
+main.cpp: 14 warnings, 0 errors
+linking...
+Program Size: Code=21526 RO-data=2182 RW-data=96 ZI-data=680  
+".\Lab1.axf" - 0 Error(s), 14 Warning(s).
+Load "C:\\Users\\Jonathan\\Documents\\current\\EEC172\\Lab_1_Tao_Gibson\\Lab1.axf" 
+RDDI-DAP Error
+Error: Flash Download failed  -  Target DLL has been cancelled
+Load "C:\\Users\\Jonathan\\Documents\\current\\EEC172\\Lab_1_Tao_Gibson\\Lab1.axf" 
+RDDI-DAP Error
+Error: Flash Download failed  -  Target DLL has been cancelled

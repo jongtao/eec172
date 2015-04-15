@@ -1,0 +1,21 @@
+--cpu Cortex-M4.fp
+".\startup_mb9bf56x.o"
+".\system_mb9abxxx.o"
+".\exint.o"
+".\mfs.o"
+".\mfs_hl.o"
+".\interrupts.o"
+".\pdl.o"
+".\wyzbee_gpio.o"
+".\clk.o"
+".\reset.o"
+".\main.o"
+".\wyzbee_spi.o"
+".\adafruit_ssd1351.o"
+".\glcdfont.o"
+".\spi_oled.o"
+".\adafruit_gfx.o"
+".\wyzbee_i2c.o"
+--ro-base 0x00000000 --entry 0x00000000 --rw-base 0x20038000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Lab1.map" -o .\Lab1.axf
