@@ -67,6 +67,7 @@
  ******************************************************************************/ 
 #ifndef _SYSTEM_MB9ABXXX_H_
   #include "system_mb9abxxx.h"
+#include "gpio_mb9bf56xm.h"
 #endif
 
 #endif // #ifndef __MCU_H__

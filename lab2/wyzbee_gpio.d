@@ -1,6 +1,6 @@
 .\wyzbee_gpio.o: WyzBee_gpio\WyzBee_gpio.c
 .\wyzbee_gpio.o: .\WyzBee_gpio\WyzBee_gpio.h
-.\wyzbee_gpio.o: .\common\gpio.h
+.\wyzbee_gpio.o: .\lib\inc\gpio.h
 .\wyzbee_gpio.o: .\common\pdl.h
 .\wyzbee_gpio.o: .\common\base_types.h
 .\wyzbee_gpio.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
@@ -17,8 +17,9 @@
 .\wyzbee_gpio.o: .\common\pdl_device.h
 .\wyzbee_gpio.o: .\lib\inc\clk.h
 .\wyzbee_gpio.o: .\common\pdl.h
-.\wyzbee_gpio.o: .\common\exint.h
-.\wyzbee_gpio.o: .\common\gpio.h
-.\wyzbee_gpio.o: .\common\mfs.h
+.\wyzbee_gpio.o: .\lib\inc\dt.h
+.\wyzbee_gpio.o: .\lib\inc\exint.h
+.\wyzbee_gpio.o: .\lib\inc\gpio.h
+.\wyzbee_gpio.o: .\lib\inc\mfs.h
 .\wyzbee_gpio.o: .\lib\inc\reset.h
-.\wyzbee_gpio.o: .\common\gpio_mb9bf56xr.h
+.\wyzbee_gpio.o: .\lib\inc\gpio_mb9bf56xr.h

@@ -1,7 +1,7 @@
 .\wyzbee_ext.o: WyzBee_ext\WyzBee_ext.c
-.\wyzbee_ext.o: WyzBee_ext\WyzBee_ext.h
+.\wyzbee_ext.o: .\WyzBee_ext\WyzBee_ext.h
 .\wyzbee_ext.o: .\lib\inc\WyzBee.h
-.\wyzbee_ext.o: .\common\exint.h
+.\wyzbee_ext.o: .\lib\inc\exint.h
 .\wyzbee_ext.o: .\common\pdl.h
 .\wyzbee_ext.o: .\common\base_types.h
 .\wyzbee_ext.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
@@ -18,8 +18,9 @@
 .\wyzbee_ext.o: .\common\pdl_device.h
 .\wyzbee_ext.o: .\lib\inc\clk.h
 .\wyzbee_ext.o: .\common\pdl.h
-.\wyzbee_ext.o: .\common\exint.h
-.\wyzbee_ext.o: .\common\gpio.h
-.\wyzbee_ext.o: .\common\gpio_mb9bf56xr.h
-.\wyzbee_ext.o: .\common\mfs.h
+.\wyzbee_ext.o: .\lib\inc\dt.h
+.\wyzbee_ext.o: .\lib\inc\exint.h
+.\wyzbee_ext.o: .\lib\inc\gpio.h
+.\wyzbee_ext.o: .\lib\inc\gpio_mb9bf56xr.h
+.\wyzbee_ext.o: .\lib\inc\mfs.h
 .\wyzbee_ext.o: .\lib\inc\reset.h

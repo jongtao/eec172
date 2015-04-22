@@ -637,7 +637,7 @@ extern "C" {
     #define IRQ010SEL_IRQHandler(void)         IRQ010_Handler(void) ///< Interrupt Source Selection 10
     #define EXINT0_IRQHandler(void)            IRQ011_Handler(void) ///< External Pin Interrupt Ch. 0
     #define EXINT1_IRQHandler(void)            IRQ012_Handler(void) ///< External Pin Interrupt Ch. 1
-    #define EXINT2_IRQHandler(void)            IRQ013_Handler(void) ///< External Pin Interrupt Ch. 2
+    //#define EXINT2_IRQHandler(void)            IRQ013_Handler(void) ///< External Pin Interrupt Ch. 2
     #define EXINT3_IRQHandler(void)            IRQ014_Handler(void) ///< External Pin Interrupt Ch. 3
     #define EXINT4_IRQHandler(void)            IRQ015_Handler(void) ///< External Pin Interrupt Ch. 4
     #define EXINT5_IRQHandler(void)            IRQ016_Handler(void) ///< External Pin Interrupt Ch. 5
@@ -671,14 +671,14 @@ extern "C" {
     #define BT5_IRQHandler(void)               IRQ044_Handler(void) ///< Base Timer Ch. 5
     #define BT6_IRQHandler(void)               IRQ045_Handler(void) ///< Base Timer Ch. 6
     #define BT7_IRQHandler(void)               IRQ046_Handler(void) ///< Base Timer Ch. 7
-    #define DT1_2_IRQHandler(void)             IRQ047_Handler(void) ///< Dual Timer Ch. 1, 2
+    //#define DT1_2_IRQHandler(void)             IRQ047_Handler(void) ///< Dual Timer Ch. 1, 2
     #define WC_IRQHandler(void)                IRQ048_Handler(void) ///< Watch Counter
     #define EXTBUS_ERR_IRQHandler(void)        IRQ049_Handler(void) ///< External Bus Error
     #define RTC_IRQHandler(void)               IRQ050_Handler(void) ///< Real Time Clock
     #define EXINT8_IRQHandler(void)            IRQ051_Handler(void) ///< External Pin Interrupt Ch. 8
     #define EXINT9_IRQHandler(void)            IRQ052_Handler(void) ///< External Pin Interrupt Ch. 9
     #define EXINT10_IRQHandler(void)           IRQ053_Handler(void) ///< External Pin Interrupt Ch. 10
-    #define EXINT11_IRQHandler(void)           IRQ054_Handler(void) ///< External Pin Interrupt Ch. 11
+    //#define EXINT11_IRQHandler(void)           IRQ054_Handler(void) ///< External Pin Interrupt Ch. 11
     #define EXINT12_IRQHandler(void)           IRQ055_Handler(void) ///< External Pin Interrupt Ch. 12
     #define EXINT13_IRQHandler(void)           IRQ056_Handler(void) ///< External Pin Interrupt Ch. 13
     #define EXINT14_IRQHandler(void)           IRQ057_Handler(void) ///< External Pin Interrupt Ch. 14

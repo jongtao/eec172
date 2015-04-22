@@ -1,6 +1,6 @@
 .\wyzbee_spi.o: WyzBee_SPI\WyzBee_spi.c
 .\wyzbee_spi.o: .\WyzBee_SPI\WyzBee_spi.h
-.\wyzbee_spi.o: .\common\mfs.h
+.\wyzbee_spi.o: .\lib\inc\mfs.h
 .\wyzbee_spi.o: .\common\pdl.h
 .\wyzbee_spi.o: .\common\base_types.h
 .\wyzbee_spi.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
@@ -17,9 +17,11 @@
 .\wyzbee_spi.o: .\common\pdl_device.h
 .\wyzbee_spi.o: .\lib\inc\clk.h
 .\wyzbee_spi.o: .\common\pdl.h
-.\wyzbee_spi.o: .\common\exint.h
-.\wyzbee_spi.o: .\common\gpio.h
-.\wyzbee_spi.o: .\common\gpio_mb9bf56xr.h
-.\wyzbee_spi.o: .\common\mfs.h
+.\wyzbee_spi.o: .\lib\inc\dt.h
+.\wyzbee_spi.o: .\lib\inc\exint.h
+.\wyzbee_spi.o: .\lib\inc\gpio.h
+.\wyzbee_spi.o: .\lib\inc\gpio_mb9bf56xr.h
+.\wyzbee_spi.o: .\lib\inc\mfs.h
 .\wyzbee_spi.o: .\lib\inc\reset.h
-.\wyzbee_spi.o: .\lib\inc\WyzBee.h
+.\wyzbee_spi.o: .\WyzBee_gpio\WyzBee.h
+.\wyzbee_spi.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

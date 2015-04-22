@@ -15,8 +15,9 @@
 .\pdl.o: common\pdl_device.h
 .\pdl.o: .\lib\inc\clk.h
 .\pdl.o: .\common\pdl.h
-.\pdl.o: common\exint.h
-.\pdl.o: common\gpio.h
-.\pdl.o: common\gpio_mb9bf56xr.h
-.\pdl.o: common\mfs.h
+.\pdl.o: .\lib\inc\dt.h
+.\pdl.o: .\lib\inc\exint.h
+.\pdl.o: .\lib\inc\gpio.h
+.\pdl.o: .\lib\inc\gpio_mb9bf56xr.h
+.\pdl.o: .\lib\inc\mfs.h
 .\pdl.o: .\lib\inc\reset.h

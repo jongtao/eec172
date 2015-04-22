@@ -144,7 +144,8 @@ __heap_limit
                 EXPORT  __Vectors
                 EXPORT  __Vectors_End
                 EXPORT  __Vectors_Size
-						;IMPORT  TimeTick_Increment
+				IMPORT  EXINT11_IRQHandler
+				IMPORT DT1_2_IRQHandler
 
 __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     Reset_Handler             ; Reset Handler
@@ -162,7 +163,6 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     PendSV_Handler            ; PendSV Handler
                 DCD     SysTick_Handler           ; SysTick Handler
-						;DCD     TimeTick_Increment         ; SysTick Handler
 
 ; Numbered IRQ handler vectors				
 				
@@ -216,14 +216,16 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     BT5_IRQHandler
                 DCD     BT6_IRQHandler
                 DCD     BT7_IRQHandler
-                DCD     DT1_2_IRAHandler
+                ;DCD     DT1_2_IRAHandler
+				DCD   	DT1_2_IRQHandler
                 DCD     WC_IRQHandler
                 DCD     EXTBUS_ERR_Handler
                 DCD     RTC_IRQHandler
                 DCD     EXTINT8_IRQHandler
                 DCD     EXTINT9_IRQHandler
                 DCD     EXTINT10_IRQHandler
-                DCD     EXTINT11_IRQHandler
+                ;DCD     EXTINT11_IRQHandler
+		      DCD     EXINT11_IRQHandler
                 DCD     EXTINT12_IRQHandler
                 DCD     EXTINT13_IRQHandler
                 DCD     EXTINT14_IRQHandler
@@ -416,14 +418,14 @@ Default_Handler PROC
                 EXPORT  BT5_IRQHandler	          [WEAK]
                 EXPORT  BT6_IRQHandler	          [WEAK]
                 EXPORT  BT7_IRQHandler	          [WEAK]
-                EXPORT  DT1_2_IRAHandler	          [WEAK]
+                ;EXPORT  DT1_2_IRAHandler	          [WEAK]
                 EXPORT  WC_IRQHandler	          [WEAK]
                 EXPORT  EXTBUS_ERR_Handler	          [WEAK]
                 EXPORT  RTC_IRQHandler	          [WEAK]
                 EXPORT  EXTINT8_IRQHandler	          [WEAK]
                 EXPORT  EXTINT9_IRQHandler	          [WEAK]
                 EXPORT  EXTINT10_IRQHandler	          [WEAK]
-                EXPORT  EXTINT11_IRQHandler	          [WEAK]
+                ;EXPORT  EXTINT11_IRQHandler	          [WEAK]
                 EXPORT  EXTINT12_IRQHandler	          [WEAK]
                 EXPORT  EXTINT13_IRQHandler	          [WEAK]
                 EXPORT  EXTINT14_IRQHandler	          [WEAK]
@@ -544,14 +546,14 @@ BT4_IRQHandler
 BT5_IRQHandler
 BT6_IRQHandler
 BT7_IRQHandler
-DT1_2_IRAHandler
+;DT1_2_IRAHandler
 WC_IRQHandler
 EXTBUS_ERR_Handler
 RTC_IRQHandler
 EXTINT8_IRQHandler
 EXTINT9_IRQHandler
 EXTINT10_IRQHandler
-EXTINT11_IRQHandler
+;EXTINT11_IRQHandler
 EXTINT12_IRQHandler
 EXTINT13_IRQHandler
 EXTINT14_IRQHandler

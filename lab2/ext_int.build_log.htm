@@ -1,0 +1,122 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.12.0.0
+Copyright (C) 2014 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Jonathan Tao, UC Davis, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.12.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.05 (build 41)
+Assembler:       Armasm.exe V5.05 (build 41)
+Linker/Locator:  ArmLink.exe V5.05 (build 41)
+Library Manager: ArmAr.exe V5.05 (build 41)
+Hex Converter:   FromElf.exe V5.05 (build 41)
+CPU DLL:         SARMCM3.DLL V5.12.0.0
+Dialog DLL:      DCM.DLL V1.13.0.0
+Target DLL:      CMSIS_AGDI.dll V1.19.0.0
+Dialog DLL:      TCM.DLL V1.14.2.0
+ 
+<h2>Project:</h2>
+C:\Users\Jonathan\Documents\current\EEC172\labs\EXTERNAL INTERRUPT IR\ext_int.uvproj
+Project File Date:  04/16/2015
+
+<h2>Output:</h2>
+Build target 'Target 1'
+".\ext_int.axf" - 0 Error(s), 0 Warning(s).
+Load "C:\\Users\\Jonathan\\Documents\\current\\EEC172\\labs\\EXTERNAL INTERRUPT IR\\ext_int.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+</pre>
+</body>
+</html>
+warning:  #1300-D: drawFastHLine inherits implicit virtual
+    void drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color);
+.\WyzBee_oled\Adafruit_SSD1351.h(95): warning:  #1300-D: drawFastVLine inherits implicit virtual
+    void drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color);
+.\WyzBee_oled\Adafruit_SSD1351.h(96): warning:  #1300-D: fillScreen inherits implicit virtual
+    void fillScreen(uint16_t fillcolor);
+.\WyzBee_oled\Adafruit_SSD1351.h(93): warning:  #997-D: function "Adafruit_GFX::fillRect(std::int16_t, std::int16_t, std::int16_t, std::int16_t, std::uint16_t)" is hidden by "Adafruit_SSD1351::fillRect" -- virtual function override intended?
+    void fillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color);
+main.cpp: 5 warnings, 0 errors
+linking...
+Program Size: Code=16902 RO-data=2054 RW-data=128 ZI-data=968  
+".\ext_int.axf" - 0 Error(s), 5 Warning(s).
+Load "C:\\Users\\Jonathan\\Documents\\current\\EEC172\\labs\\EXTERNAL INTERRUPT IR\\ext_int.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+mming Done.
+Verify OK.
+piling infrared.c...
+infrared.c(19): error:  #147: declaration is incompatible with "uint32_t buffer" (declared at line 68 of "infrared.h")
+  volatile uint32_t buffer;
+infrared.c: 0 warnings, 1 error
+".\ext_int.axf" - 3 Error(s), 6 Warning(s).
+Target not created.
+mming Done.
+Verify OK.
+7: expected a statement
+                                                else
+infrared.c(76): error:  #2706: case label value has already appeared in this switch at line 44
+                                case END:
+infrared.c: 0 warnings, 5 errors
+".\ext_int.axf" - 6 Error(s), 6 Warning(s).
+Target not created.
+t16_t y, int16_t h, uint16_t color);
+WyzBee_oled\Adafruit_SSD1351.h(96): warning:  #1300-D: fillScreen inherits implicit virtual
+    void fillScreen(uint16_t fillcolor);
+WyzBee_oled\Adafruit_SSD1351.h(93): warning:  #997-D: function "Adafruit_GFX::fillRect(std::int16_t, std::int16_t, std::int16_t, std::int16_t, std::uint16_t)" is hidden by "Adafruit_SSD1351::fillRect" -- virtual function override intended?
+    void fillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color);
+WyzBee_oled\Adafruit_SSD1351.cpp: 5 warnings, 0 errors
+compiling glcdfont.c...
+WyzBee_oled\glcdfont.c(13): warning:  #177-D: variable "font" was declared but never referenced
+  static const unsigned char font[] PROGMEM = {
+WyzBee_oled\glcdfont.c: 1 warning, 0 errors
+compiling SPI_OLED.cpp...
+compiling WyzBee_spi.c...
+WyzBee_SPI\WyzBee_spi.c(148): warning:  #167-D: argument of type "WyzBeeSpi_TxIsrCallBack_t" is incompatible with parameter of type "mfs_tx_cb_func_ptr_t"
+                Mfs_SetTxIntCallBack(SPI_INSTANCE, p_config->TxIsr);            // Register the TX call back
+WyzBee_SPI\WyzBee_spi.c(149): warning:  #167-D: argument of type "WyzBeeSpi_RxIsrCallBack_t" is incompatible with parameter of type "mfs_rx_cb_func_ptr_t"
+                Mfs_SetRxIntCallBack(SPI_INSTANCE, p_config->RxIsr);            // Register the RX call back
+WyzBee_SPI\WyzBee_spi.c: 2 warnings, 0 errors
+compiling timetick.c...
+compiling variant.cpp...
+compiling wiring.c...
+compiling infrared.c...
+infrared.h(50): warning:  #1295-D: Deprecated declaration infrared_init - give arg types
+  void infrared_init();
+infrared.c: 1 warning, 0 errors
+compiling WyzBee_ext.c...
+linking...
+.\ext_int.axf: Error: L6218E: Undefined symbol infrared_init() (referred from main.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 1 error messages.
+".\ext_int.axf" - 1 Error(s), 15 Warning(s).
+Target not created.
+ableInt(&timer_ISR, DtChannel0); // Timeout Interrupt
+infrared.c(131): error:  #757: constant "DtChannel0" is not a type name
+        Dt_EnableInt(&timer_ISR, DtChannel0); // Timeout Interrupt
+infrared.c(131): warning:  #77-D: this declaration has no storage class or type specifier
+        Dt_EnableInt(&timer_ISR, DtChannel0); // Timeout Interrupt
+infrared.c(131): error:  #147: declaration is incompatible with "en_result_t Dt_EnableInt(dt_cb_func_ptr_t, uint8_t)" (declared at line 253 of ".\lib\inc\dt.h")
+        Dt_EnableInt(&timer_ISR, DtChannel0); // Timeout Interrupt
+infrared.c(132): error:  #169: expected a declaration
+  } // infrared_init();
+infrared.c: 5 warnings, 20 errors
+".\ext_int.axf" - 20 Error(s), 11 Warning(s).
+Target not created.
+t Interrupt
+infrared.c(131): warning:  #77-D: this declaration has no storage class or type specifier
+        Dt_EnableInt(&timer_ISR, DtChannel0); // Timeout Interrupt
+infrared.c(131): error:  #147: declaration is incompatible with "en_result_t Dt_EnableInt(dt_cb_func_ptr_t, uint8_t)" (declared at line 253 of ".\lib\inc\dt.h")
+        Dt_EnableInt(&timer_ISR, DtChannel0); // Timeout Interrupt
+infrared.c(132): error:  #169: expected a declaration
+  } // infrared_init();
+infrared.c: 5 warnings, 20 errors
+".\ext_int.axf" - 25 Error(s), 11 Warning(s).
+Target not created.

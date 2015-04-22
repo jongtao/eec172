@@ -15,8 +15,9 @@
 .\system_mb9abxxx.o: .\common\pdl_device.h
 .\system_mb9abxxx.o: .\lib\inc\clk.h
 .\system_mb9abxxx.o: .\common\pdl.h
-.\system_mb9abxxx.o: .\common\exint.h
-.\system_mb9abxxx.o: .\common\gpio.h
-.\system_mb9abxxx.o: .\common\gpio_mb9bf56xr.h
-.\system_mb9abxxx.o: .\common\mfs.h
+.\system_mb9abxxx.o: .\lib\inc\dt.h
+.\system_mb9abxxx.o: .\lib\inc\exint.h
+.\system_mb9abxxx.o: .\lib\inc\gpio.h
+.\system_mb9abxxx.o: .\lib\inc\gpio_mb9bf56xr.h
+.\system_mb9abxxx.o: .\lib\inc\mfs.h
 .\system_mb9abxxx.o: .\lib\inc\reset.h

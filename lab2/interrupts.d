@@ -15,9 +15,10 @@
 .\interrupts.o: common\pdl_device.h
 .\interrupts.o: .\lib\inc\clk.h
 .\interrupts.o: .\common\pdl.h
-.\interrupts.o: common\exint.h
-.\interrupts.o: common\gpio.h
-.\interrupts.o: common\gpio_mb9bf56xr.h
-.\interrupts.o: common\mfs.h
+.\interrupts.o: .\lib\inc\dt.h
+.\interrupts.o: .\lib\inc\exint.h
+.\interrupts.o: .\lib\inc\gpio.h
+.\interrupts.o: .\lib\inc\gpio_mb9bf56xr.h
+.\interrupts.o: .\lib\inc\mfs.h
 .\interrupts.o: .\lib\inc\reset.h
 .\interrupts.o: common\interrupts.h

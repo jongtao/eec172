@@ -1,6 +1,6 @@
 .\wyzbee_timer.o: WyzBee_timer\WyzBee_timer.c
-.\wyzbee_timer.o: WyzBee_timer\WyzBee_timer.h
-.\wyzbee_timer.o: .\lib\inc\WyzBee.h
+.\wyzbee_timer.o: .\WyzBee_timer\WyzBee_timer.h
+.\wyzbee_timer.o: .\WyzBee_gpio\WyzBee.h
 .\wyzbee_timer.o: .\lib\inc\dt.h
 .\wyzbee_timer.o: .\common\pdl.h
 .\wyzbee_timer.o: .\common\base_types.h
@@ -18,8 +18,9 @@
 .\wyzbee_timer.o: .\common\pdl_device.h
 .\wyzbee_timer.o: .\lib\inc\clk.h
 .\wyzbee_timer.o: .\common\pdl.h
-.\wyzbee_timer.o: .\common\exint.h
-.\wyzbee_timer.o: .\common\gpio.h
-.\wyzbee_timer.o: .\common\gpio_mb9bf56xr.h
-.\wyzbee_timer.o: .\common\mfs.h
+.\wyzbee_timer.o: .\lib\inc\dt.h
+.\wyzbee_timer.o: .\lib\inc\exint.h
+.\wyzbee_timer.o: .\lib\inc\gpio.h
+.\wyzbee_timer.o: .\lib\inc\gpio_mb9bf56xr.h
+.\wyzbee_timer.o: .\lib\inc\mfs.h
 .\wyzbee_timer.o: .\lib\inc\reset.h

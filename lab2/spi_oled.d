@@ -1,6 +1,6 @@
 .\spi_oled.o: WyzBee_oled\SPI_OLED.cpp
 .\spi_oled.o: WyzBee_oled\SPI_OLED.h
-.\spi_oled.o: .\common\mfs.h
+.\spi_oled.o: .\lib\inc\mfs.h
 .\spi_oled.o: .\common\pdl.h
 .\spi_oled.o: .\common\base_types.h
 .\spi_oled.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
@@ -17,8 +17,9 @@
 .\spi_oled.o: .\common\pdl_device.h
 .\spi_oled.o: .\lib\inc\clk.h
 .\spi_oled.o: .\common\pdl.h
-.\spi_oled.o: .\common\exint.h
-.\spi_oled.o: .\common\gpio.h
-.\spi_oled.o: .\common\gpio_mb9bf56xr.h
-.\spi_oled.o: .\common\mfs.h
+.\spi_oled.o: .\lib\inc\dt.h
+.\spi_oled.o: .\lib\inc\exint.h
+.\spi_oled.o: .\lib\inc\gpio.h
+.\spi_oled.o: .\lib\inc\gpio_mb9bf56xr.h
+.\spi_oled.o: .\lib\inc\mfs.h
 .\spi_oled.o: .\lib\inc\reset.h

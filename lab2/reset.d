@@ -16,9 +16,10 @@
 .\reset.o: .\common\pdl_device.h
 .\reset.o: .\lib\inc\clk.h
 .\reset.o: .\common\pdl.h
-.\reset.o: .\common\exint.h
-.\reset.o: .\common\gpio.h
-.\reset.o: .\common\gpio_mb9bf56xr.h
-.\reset.o: .\common\mfs.h
+.\reset.o: .\lib\inc\dt.h
+.\reset.o: .\lib\inc\exint.h
+.\reset.o: .\lib\inc\gpio.h
+.\reset.o: .\lib\inc\gpio_mb9bf56xr.h
+.\reset.o: .\lib\inc\mfs.h
 .\reset.o: .\lib\inc\reset.h
 .\reset.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

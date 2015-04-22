@@ -1,5 +1,5 @@
 .\exint.o: lib\src\exint.c
-.\exint.o: .\common\exint.h
+.\exint.o: .\lib\inc\exint.h
 .\exint.o: .\common\pdl.h
 .\exint.o: .\common\base_types.h
 .\exint.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
@@ -16,8 +16,9 @@
 .\exint.o: .\common\pdl_device.h
 .\exint.o: .\lib\inc\clk.h
 .\exint.o: .\common\pdl.h
-.\exint.o: .\common\exint.h
-.\exint.o: .\common\gpio.h
-.\exint.o: .\common\gpio_mb9bf56xr.h
-.\exint.o: .\common\mfs.h
+.\exint.o: .\lib\inc\dt.h
+.\exint.o: .\lib\inc\exint.h
+.\exint.o: .\lib\inc\gpio.h
+.\exint.o: .\lib\inc\gpio_mb9bf56xr.h
+.\exint.o: .\lib\inc\mfs.h
 .\exint.o: .\lib\inc\reset.h

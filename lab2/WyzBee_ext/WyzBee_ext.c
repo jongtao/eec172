@@ -33,12 +33,10 @@
  *********************************************************************************************************
  */
 
-#include "WyzBee_ext.h"
+#include <WyzBee_ext.h>
 #include <exint.h>
 #include <WyzBee.h>
 #include <pdl.h>
-
-
 /*
  *********************************************************************************************************
  *                                              LOCAL DEFINES
@@ -104,7 +102,7 @@
 err_t WyzBee_Exint_Init(WyzBee_exint_config_t* Config)
 {
    stc_exint_config_t pstcConfig;
-   uint8 ret;
+   //uint8 ret;
    pstcConfig.abEnable[11]   =   Config->abEnable[11];
    pstcConfig.aenLevel[11]	 =	 Config->aenLevel[11];
    pstcConfig.apfnExintCallback[11]   =   Config->apfnExintCallback[11];
@@ -115,6 +113,20 @@ err_t WyzBee_Exint_Init(WyzBee_exint_config_t* Config)
 
 
 } // Exint_DisableChannel
+err_t WyzBee_Exint_IR_Init(WyzBee_exint_config_t* Config)
+{
+   stc_exint_config_t pstcConfig;
+   //uint8 ret;
+   pstcConfig.abEnable[2]   =   Config->abEnable[2];
+   pstcConfig.aenLevel[2]	 =	 Config->aenLevel[2];
+   pstcConfig.apfnExintCallback[2]   =   Config->apfnExintCallback[2];
+   WyzBeeSetPin_INT02_1(0u);
+   if(!(Exint_Init(&pstcConfig)))
+	   return ERR_NONE;
+   else return ERR_INVALID_PARMS;
+
+
+}
 
 
 /**
@@ -184,8 +196,7 @@ err_t WyzBee_Exint_DisableChannel(uint8_t u8Channel)
   return ERR_NONE;
 } // Exint_DisableChannel
 
-
-/*
+/**
  ******************************************************************************
  ** \brief Init Non-Maskable Interrupt (NMI)
  **

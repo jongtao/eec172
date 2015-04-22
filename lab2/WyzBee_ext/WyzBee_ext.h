@@ -29,14 +29,15 @@
 #ifndef WyzBee_EXT_H
 #define WyzBee_EXT_H
 
+#ifdef __cplusplus
+extern "C"{
+#endif
+	
 /*
  *********************************************************************************************************
  *                                              INCLUDE FILES
  *********************************************************************************************************
  */
-#ifdef __cplusplus
-extern "C"{
-#endif
 
 #include <WyzBee.h>
 #include <exint.h>
@@ -51,6 +52,7 @@ extern "C"{
 #define WyzBee_PDL_ZERO(x) PDL_ZERO_STRUCT(x)
 
 #define WyzBeeSetPin_INT11_1(x) SetPinFunc_INT11_1(x);
+#define WyzBeeSetPin_INT02_1(x) SetPinFunc_INT02_1(x);
 /*
 *********************************************************************************************************
 *********************************************************************************************************
@@ -107,6 +109,7 @@ typedef struct WyzBee_exint_nmi_config                   /*-------------NMNI STR
 
 
 err_t WyzBee_Exint_Init(WyzBee_exint_config_t* Config) ;
+err_t WyzBee_Exint_IR_Init(WyzBee_exint_config_t* Config) ;
 
 err_t WyzBee_Exint_DeInit(void) ;
 
@@ -122,7 +125,9 @@ err_t WyzBee_Exint_Nmi_DeInit(WyzBee_exint_nmi_config_t* Config) ;
  *                                           END
  *********************************************************************************************************
  */
+ 
 #ifdef __cplusplus
 }
 #endif
+
 #endif // WyzBee_ext_H

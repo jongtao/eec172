@@ -56,7 +56,7 @@
 /* Include files                                                              */
 /******************************************************************************/
 #include "pdl.h"
-
+#define PDL_PERIPHERAL_MFS_ACTIVE
 #if (defined(PDL_PERIPHERAL_MFS_ACTIVE))
 
 /* C binding of definitions if building with C++ compiler */
