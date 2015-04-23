@@ -9,7 +9,7 @@ extern "C" {
 
 
 // TIMER Constants
-#define TIMEOUT 0xFFFF // ~0.21 Seconds Timeout
+#define TIMEOUT 0x8647 // 110 ms
 
 // NEC Protocol Constants
 // in units of ticks
@@ -34,8 +34,8 @@ extern "C" {
 #define PIN_IR P10
 #define IR_INT_CHAN 2
 
-
-#define BIT_MASK 0x80000000u
+// event queue
+#define Q_LENGTH 16
 
 
 
@@ -45,29 +45,26 @@ typedef enum
 	WAIT,
 	HEAD,
 	DATA,
-	REPEAT,
 	END
 } State;
 
 
 typedef struct
 {
-	uint8_t type;
-	uint8_t address;
-	uint8_t data;
-} Element;
+	uint8_t pressing;
+	uint8_t addr;
+	uint8_t cmd;
+} Button;
 
 
-typedef enum
-{
-	START,
-	STOP
-} El_type;
+extern volatile uint32_t buffer; 
+extern volatile Button key;
 
 
-volatile extern uint32_t buffer;
+void IR_ISR(void);
+void timer_ISR(void);
 
-
+uint8_t extract(uint32_t word, volatile Button* button);
 
 void infrared_init(void);
 

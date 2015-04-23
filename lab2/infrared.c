@@ -10,13 +10,10 @@ uint8_t state, is_first;
 uint32_t prev_t, delta_mark, delta_space;
 uint8_t data_count;
 
-// event queue
-Element ir_event_queue[32];
-uint8_t head, tail;
-
-Element current;
-uint32_t stream;
-volatile uint32_t buffer;
+// Key Buffers
+uint32_t stream; // holds bits as they come in
+volatile Button key;
+volatile uint32_t buffer; // test buffer
 
 
 
@@ -42,12 +39,17 @@ void IR_ISR(void)
 						if((delta_space >= (HEAD2DATA_SPACE - TOLERANCE)) &&
 							(delta_space <= (HEAD2DATA_SPACE + TOLERANCE)))
 						{
+							if(key.pressing) // can only press one button on remote
+								key.pressing = 0;
+
 							state = DATA;
 						} // go to DATA
 
 						if((delta_space >= (HEAD2REPEAT_SPACE - TOLERANCE)) &&
 							(delta_space <= (HEAD2REPEAT_SPACE + TOLERANCE)))
+						{
 							state = END;
+						} // go to END (Repeat)
 
 						data_count = 0;
 						stream = 0;
@@ -71,11 +73,16 @@ void IR_ISR(void)
 					data_count++;
 					if(data_count == IR_WORD_SIZE)
 					{
-						buffer = stream; // readable buffer
-						if(buffer == 0xEA15FB04)
-							GpioPut(P42, 0); // LED
-							
-						state = END;
+						if(extract(stream, &key)) // attempt to extract
+						{
+							key.pressing = 0;
+							state = WAIT; // abort data
+						}
+						else
+						{
+							key.pressing = 1;
+							state = END;
+						} // else data is good
 					}
 					break;
 
@@ -124,12 +131,34 @@ void IR_ISR(void)
 
 
 
-void timer_ISR(void)
+void timer_ISR(void) // triggers on TIMEOUT
 {
-	// IF OVERFLOW ...
-	//GpioPut(PIN_BLINKY, 0);
+	key.pressing = 0;
 	state = WAIT;
 } // timer_ISR()
+
+
+
+uint8_t extract(uint32_t word, volatile Button* button)
+{
+	uint8_t addr, addr_, cmd, cmd_;
+
+	addr = word & 0x000000FF;
+	addr_ = ~((word & 0x0000FF00) >> 8);
+	cmd = (word & 0x00FF0000) >> 16;
+	cmd_ = ~((word & 0xFF000000) >> 24);
+
+	if((addr != addr_) || (cmd != cmd_)) // if error
+	{
+		return 1; //error
+	}
+	else
+	{
+		button->addr = addr;
+		button->cmd = cmd;
+		return 0;
+	} // else ok
+} // extract()
 
 
 
@@ -137,8 +166,11 @@ void infrared_init(void)
 {
 	// State Machine
 	state = WAIT;
-	is_first = 1; // if no cycle data
+	is_first = 1; // no cycle data
 	prev_t = delta_space = delta_mark = 0;
+
+	// Event Queue	
+	key.pressing = 0; // button is not pressed continuously
 
 	// External interrupt on INT02_1
   PDL_ZERO_STRUCT(exint_config);

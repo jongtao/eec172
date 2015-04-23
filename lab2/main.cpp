@@ -25,7 +25,9 @@
 #include <WyzBee_kit.h>
 #include <WyzBee.h>
 
+// My Includes
 #include "infrared.h"
+#include "string.h"
 
 
 
@@ -68,6 +70,9 @@ void printString(uint16_t xCoord, uint16_t yCoord, char* myString)
 int main(void)
 {
 
+	// string
+	char string[64];
+
 	// Config GPIO
 	GpioInitOut(PIN_BLINKY, 0);
 	GpioInitOut(P42, 1); // LED
@@ -75,44 +80,23 @@ int main(void)
 	// Screen init
 	WyzBeeSpi_Init(&config_stc);
 
-	// config screen
 	tft.begin();
 	tft.fillScreen(BLACK);
 	tft.setTextColor(WHITE, BLACK);
 	tft.setTextSize(2);
 
-
+	// IR init
 	infrared_init();
 
-		
-	/*TODO: Initialize the OLED display according to Lab1.*/
-	
-	GpioPut(PIN_BLINKY, 1);
-	GpioPut(PIN_BLINKY, 0);
-	GpioPut(PIN_BLINKY, 1);
 	while(1)
 	{
-		if((buffer & 0x000F0000) == 0x00010000)
-			printString(0, 0, "1");
+		if(key.pressing)
+			GpioPut(P42, 0); // LED
+		else
+			GpioPut(P42, 1); // LED
 
-		if((buffer & 0x000F0000) == 0x00020000)
-			printString(0, 0, "2");
-
-		if((buffer & 0x000F0000) == 0x00030000)
-			printString(0, 0, "3");
-
-		if((buffer & 0x000F0000) == 0x00040000)
-			printString(0, 0, "4");
-
-		if((buffer & 0x000F0000) == 0x00050000)
-			printString(0, 0, "5");
-
-
-		/*
-		count = Dt_ReadCurCntVal(0);
-		if(Dt_ReadCurCntVal(0) > 0 && Dt_ReadCurCntVal(0) < 100)
-			GpioPut(PIN_BLINKY, 0);
-			*/
+		sprintf(string, "Addr:%02X\nCmd:%02X", key.addr, key.cmd);
+		printString(0, 0, string);
 	} // main loop
 
 } // main()
