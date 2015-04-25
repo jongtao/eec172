@@ -8,78 +8,23 @@ Copyright (C) 2014 ARM Ltd and ARM Germany GmbH. All rights reserved.
 License Information: Jonathan Tao, UC Davis, LIC=----
  
 Tool Versions:
-Toolchain:       MDK-Lite  Version: 5.12.0.0
-Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+Toolchain:       MDK-Lite  Version: <unknown>
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\bin\
 C Compiler:      Armcc.exe V5.05 (build 41)
 Assembler:       Armasm.exe V5.05 (build 41)
 Linker/Locator:  ArmLink.exe V5.05 (build 41)
 Library Manager: ArmAr.exe V5.05 (build 41)
 Hex Converter:   FromElf.exe V5.05 (build 41)
-CPU DLL:         SARMCM3.DLL V5.12.0.0
-Dialog DLL:      DCM.DLL V1.13.0.0
-Target DLL:      CMSIS_AGDI.dll V1.19.0.0
-Dialog DLL:      TCM.DLL V1.14.2.0
+CPU DLL:         SARMCM3.DLL
+Dialog DLL:      DCM.DLL
+    Target DLL: CMSIS_AGDI.dll
+Dialog DLL:      TCM.DLL
  
 <h2>Project:</h2>
 C:\Users\Jonathan\Documents\current\EEC172\labs\lab2\ext_int.uvproj
-Project File Date:  04/22/2015
+Project File Date:  04/23/2015
 
 <h2>Output:</h2>
-Build target 'Target 1'
-compiling main.cpp...
-.\WyzBee_oled\Adafruit_SSD1351.h(92): warning:  #1300-D: drawPixel inherits implicit virtual
-    void drawPixel(int16_t x, int16_t y, uint16_t color);
-.\WyzBee_oled\Adafruit_SSD1351.h(94): warning:  #1300-D: drawFastHLine inherits implicit virtual
-    void drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color);
-.\WyzBee_oled\Adafruit_SSD1351.h(95): warning:  #1300-D: drawFastVLine inherits implicit virtual
-    void drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color);
-.\WyzBee_oled\Adafruit_SSD1351.h(96): warning:  #1300-D: fillScreen inherits implicit virtual
-    void fillScreen(uint16_t fillcolor);
-.\WyzBee_oled\Adafruit_SSD1351.h(93): warning:  #997-D: function "Adafruit_GFX::fillRect(std::int16_t, std::int16_t, std::int16_t, std::int16_t, std::uint16_t)" is hidden by "Adafruit_SSD1351::fillRect" -- virtual function override intended?
-    void fillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color);
-main.cpp: 5 warnings, 0 errors
-compiling infrared.c...
-linking...
-Program Size: Code=17672 RO-data=2112 RW-data=128 ZI-data=872  
-".\ext_int.axf" - 0 Error(s), 5 Warning(s).
-Load "C:\\Users\\Jonathan\\Documents\\current\\EEC172\\labs\\lab2\\ext_int.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
 </pre>
 </body>
 </html>
-\Documents\\current\\EEC172\\labs\\lab2\\ext_int.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
-t DLL has been cancelled
-Load "C:\\Users\\Jonathan\\Documents\\current\\EEC172\\labs\\lab2\\ext_int.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
-= cmd;
-infrared.c(154): warning:  #550-D: variable "addr_" was set but never used
-        uint8_t addr, addr_, cmd, cmd_;
-infrared.c(182): error:  #20: identifier "pressing" is undefined
-        pressing = 0; // if button is pressed continuously
-infrared.c: 2 warnings, 4 errors
-".\ext_int.axf" - 4 Error(s), 7 Warning(s).
-Target not created.
-zBee_oled\Adafruit_SSD1351.h(93): warning:  #997-D: function "Adafruit_GFX::fillRect(std::int16_t, std::int16_t, std::int16_t, std::int16_t, std::uint16_t)" is hidden by "Adafruit_SSD1351::fillRect" -- virtual function override intended?
-    void fillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color);
-WyzBee_oled\Adafruit_SSD1351.cpp: 5 warnings, 0 errors
-compiling SPI_OLED.cpp...
-compiling WyzBee_spi.c...
-WyzBee_SPI\WyzBee_spi.c(148): warning:  #167-D: argument of type "WyzBeeSpi_TxIsrCallBack_t" is incompatible with parameter of type "mfs_tx_cb_func_ptr_t"
-                Mfs_SetTxIntCallBack(SPI_INSTANCE, p_config->TxIsr);            // Register the TX call back
-WyzBee_SPI\WyzBee_spi.c(149): warning:  #167-D: argument of type "WyzBeeSpi_RxIsrCallBack_t" is incompatible with parameter of type "mfs_rx_cb_func_ptr_t"
-                Mfs_SetRxIntCallBack(SPI_INSTANCE, p_config->RxIsr);            // Register the RX call back
-WyzBee_SPI\WyzBee_spi.c: 2 warnings, 0 errors
-compiling variant.cpp...
-compiling wiring.c...
-compiling infrared.c...
-compiling WyzBee_ext.c...
-linking...
-Program Size: Code=16902 RO-data=2054 RW-data=128 ZI-data=968  
-".\ext_int.axf" - 0 Error(s), 12 Warning(s).

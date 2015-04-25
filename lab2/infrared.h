@@ -58,7 +58,7 @@ typedef struct
 
 
 extern volatile uint32_t buffer; 
-extern volatile Button key;
+extern Button key;
 
 
 void IR_ISR(void);

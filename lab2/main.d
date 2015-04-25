@@ -41,3 +41,4 @@
 .\main.o: .\WyzBee_gpio\timetick.h
 .\main.o: C:\Keil_v5\ARM\CMSIS\Include\core_cm4.h
 .\main.o: infrared.h
+.\main.o: game.h

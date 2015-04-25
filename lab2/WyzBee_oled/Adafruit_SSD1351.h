@@ -16,6 +16,9 @@
   BSD license, all text above must be included in any redistribution
  ****************************************************/
 
+#ifndef SSD1331
+#define SSD1331
+
 #define SSD1351WIDTH 128
 #define SSD1351HEIGHT 128  // SET THIS TO 96 FOR 1.27"!
 
@@ -120,3 +123,5 @@ class Adafruit_SSD1351  : public virtual Adafruit_GFX {
   PortReg *csport, *rsport, *sidport, *sclkport;
   PortMask cspinmask, rspinmask, sidpinmask, sclkpinmask;
 };
+
+#endif // SSD1331 

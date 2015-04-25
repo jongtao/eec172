@@ -28,6 +28,7 @@
 // My Includes
 #include "infrared.h"
 #include "string.h"
+#include "game.h"
 
 
 
@@ -72,6 +73,8 @@ int main(void)
 
 	// string
 	char string[64];
+	uint32_t d;
+	uint32_t seed = 0;
 
 	// Config GPIO
 	GpioInitOut(PIN_BLINKY, 0);
@@ -85,8 +88,16 @@ int main(void)
 	tft.setTextColor(WHITE, BLACK);
 	tft.setTextSize(2);
 
+	sprintf(string, "MINCERAFT\n\nPress OK\nto start");
+		printString(0, 0, string);
+
+
 	// IR init
 	infrared_init();
+	while(!key.pressing)
+		seed++;
+
+	game_init(&tft,&key,seed);
 
 	while(1)
 	{
@@ -95,8 +106,14 @@ int main(void)
 		else
 			GpioPut(P42, 1); // LED
 
-		sprintf(string, "Addr:%02X\nCmd:%02X", key.addr, key.cmd);
-		printString(0, 0, string);
+		game_update();
+
+		for(d=0;d<0xFFFF;d++);
+
+
+		//sprintf(string, "Addr:%02X\nCmd:%02X", key.addr, key.cmd);
+		//printString(0, 0, string);
+		
 	} // main loop
 
 } // main()

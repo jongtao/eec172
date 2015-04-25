@@ -12,7 +12,7 @@ uint8_t data_count;
 
 // Key Buffers
 uint32_t stream; // holds bits as they come in
-volatile Button key;
+Button key;
 volatile uint32_t buffer; // test buffer
 
 
