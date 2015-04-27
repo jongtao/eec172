@@ -43,7 +43,6 @@ extern "C" {
 typedef enum
 {
 	WAIT,
-	HEAD,
 	DATA,
 	END
 } State;

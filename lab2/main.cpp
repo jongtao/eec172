@@ -9,10 +9,6 @@
 	 NEC Protocol
  */
 
-// Defines whether or not to enable the IR testing example
-//#define TEST_IR
-
-
 // WyzBee Includes
 #include <WyzBee_gpio.h>
 #include <WyzBee_ext.h>
@@ -30,16 +26,12 @@
 #include "string.h"
 #include "game.h"
 
-
-
 // GPIO Constants
 #define PIN_BLINKY P12
 
 
+
 extern Adafruit_SSD1351 tft = Adafruit_SSD1351(); //@  OLED class variable
-
-/*TODO: Insert function to print to OLED display (Lab1).*/
-
 
 WyzBeeSpi_Config_t  config_stc =
 {
@@ -70,7 +62,6 @@ void printString(uint16_t xCoord, uint16_t yCoord, char* myString)
 
 int main(void)
 {
-
 	// string
 	char string[64];
 	uint32_t d;
@@ -89,17 +80,15 @@ int main(void)
 	tft.setTextSize(2);
 
 	sprintf(string, "MINCERAFT\n\nPress OK\nto start");
-		printString(0, 0, string);
-
+	printString(0, 0, string);
 
 	// IR init
 	infrared_init();
-	while(!key.pressing)
-		seed++;
+	while(!key.pressing) seed++; // get seed based on user's input
 
 	game_init(&tft,&key,seed);
 
-	while(1)
+	for(;;)
 	{
 		if(key.pressing)
 			GpioPut(P42, 0); // LED
@@ -108,12 +97,11 @@ int main(void)
 
 		game_update();
 
-		for(d=0;d<0xFFFF;d++);
-
+		for(d=0;d<0xFFFF;d++); // delay
 
 		//sprintf(string, "Addr:%02X\nCmd:%02X", key.addr, key.cmd);
 		//printString(0, 0, string);
-		
 	} // main loop
 
+	return 0;
 } // main()

@@ -8,23 +8,54 @@ Copyright (C) 2014 ARM Ltd and ARM Germany GmbH. All rights reserved.
 License Information: Jonathan Tao, UC Davis, LIC=----
  
 Tool Versions:
-Toolchain:       MDK-Lite  Version: <unknown>
-Toolchain Path:  C:\Keil_v5\ARM\ARMCC\bin\
+Toolchain:       MDK-Lite  Version: 5.12.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
 C Compiler:      Armcc.exe V5.05 (build 41)
 Assembler:       Armasm.exe V5.05 (build 41)
 Linker/Locator:  ArmLink.exe V5.05 (build 41)
 Library Manager: ArmAr.exe V5.05 (build 41)
 Hex Converter:   FromElf.exe V5.05 (build 41)
-CPU DLL:         SARMCM3.DLL
-Dialog DLL:      DCM.DLL
-    Target DLL: CMSIS_AGDI.dll
-Dialog DLL:      TCM.DLL
+CPU DLL:         SARMCM3.DLL V5.12.0.0
+Dialog DLL:      DCM.DLL V1.13.0.0
+Target DLL:      CMSIS_AGDI.dll V1.19.0.0
+Dialog DLL:      TCM.DLL V1.14.2.0
  
 <h2>Project:</h2>
 C:\Users\Jonathan\Documents\current\EEC172\labs\lab2\ext_int.uvproj
 Project File Date:  04/23/2015
 
 <h2>Output:</h2>
+Build target 'Target 1'
+compiling main.cpp...
+.\WyzBee_oled\Adafruit_SSD1351.h(95): warning:  #1300-D: drawPixel inherits implicit virtual
+    void drawPixel(int16_t x, int16_t y, uint16_t color);
+.\WyzBee_oled\Adafruit_SSD1351.h(97): warning:  #1300-D: drawFastHLine inherits implicit virtual
+    void drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color);
+.\WyzBee_oled\Adafruit_SSD1351.h(98): warning:  #1300-D: drawFastVLine inherits implicit virtual
+    void drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color);
+.\WyzBee_oled\Adafruit_SSD1351.h(99): warning:  #1300-D: fillScreen inherits implicit virtual
+    void fillScreen(uint16_t fillcolor);
+.\WyzBee_oled\Adafruit_SSD1351.h(96): warning:  #997-D: function "Adafruit_GFX::fillRect(std::int16_t, std::int16_t, std::int16_t, std::int16_t, std::uint16_t)" is hidden by "Adafruit_SSD1351::fillRect" -- virtual function override intended?
+    void fillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color);
+main.cpp(106): warning:  #111-D: statement is unreachable
+        return 0;
+main.cpp: 6 warnings, 0 errors
+compiling infrared.c...
+compiling game.cpp...
+.\WyzBee_oled\Adafruit_SSD1351.h(95): warning:  #1300-D: drawPixel inherits implicit virtual
+    void drawPixel(int16_t x, int16_t y, uint16_t color);
+.\WyzBee_oled\Adafruit_SSD1351.h(97): warning:  #1300-D: drawFastHLine inherits implicit virtual
+    void drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color);
+.\WyzBee_oled\Adafruit_SSD1351.h(98): warning:  #1300-D: drawFastVLine inherits implicit virtual
+    void drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color);
+.\WyzBee_oled\Adafruit_SSD1351.h(99): warning:  #1300-D: fillScreen inherits implicit virtual
+    void fillScreen(uint16_t fillcolor);
+.\WyzBee_oled\Adafruit_SSD1351.h(96): warning:  #997-D: function "Adafruit_GFX::fillRect(std::int16_t, std::int16_t, std::int16_t, std::int16_t, std::uint16_t)" is hidden by "Adafruit_SSD1351::fillRect" -- virtual function override intended?
+    void fillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color);
+game.cpp: 5 warnings, 0 errors
+linking...
+Program Size: Code=19334 RO-data=2054 RW-data=144 ZI-data=1360  
+".\ext_int.axf" - 0 Error(s), 11 Warning(s).
 </pre>
 </body>
 </html>

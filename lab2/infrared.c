@@ -17,7 +17,6 @@ volatile uint32_t buffer; // test buffer
 
 
 
-
 void IR_ISR(void)
 {
 	uint32_t tmp_time;
@@ -151,7 +150,7 @@ uint8_t extract(uint32_t word, volatile Button* button)
 	if((addr != addr_) || (cmd != cmd_)) // if error
 	{
 		return 1; //error
-	}
+	} // if error found
 	else
 	{
 		button->addr = addr;
