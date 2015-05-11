@@ -1,0 +1,9 @@
+.\rsi_lib_util.o: ..\Lib\BSP\driver\rsi_lib_util.c
+.\rsi_lib_util.o: ..\Lib\rsi_wifi_apis\core\include\rsi_global.h
+.\rsi_lib_util.o: ..\Lib\rsi_wifi_apis\hal\include\rsi_hal.h
+.\rsi_lib_util.o: ..\Lib\rsi_wifi_apis\core\include\rsi_global.h
+.\rsi_lib_util.o: ..\Lib\rsi_wifi_apis\hal\include\platform_specific.h
+.\rsi_lib_util.o: ..\Lib\rsi_wifi_apis\ref_apps\include\rsi_config.h
+.\rsi_lib_util.o: ..\Lib\rsi_wifi_apis\core\include\rsi_api.h
+.\rsi_lib_util.o: ..\Lib\rsi_wifi_apis\ref_apps\include\rsi_app_util.h
+.\rsi_lib_util.o: ..\Lib\rsi_wifi_apis\ref_apps\include\rsi_config.h

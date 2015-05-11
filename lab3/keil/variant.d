@@ -1,0 +1,10 @@
+.\variant.o: ..\Lib\BSP\driver\variant.c
+.\variant.o: ..\common\mb9abxxx.h
+.\variant.o: C:\Keil_v5\ARM\CMSIS\Include\core_cm4.h
+.\variant.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\variant.o: C:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h
+.\variant.o: C:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h
+.\variant.o: C:\Keil_v5\ARM\CMSIS\Include\core_cm4_simd.h
+.\variant.o: ..\common\system_mb9abxxx.h
+.\variant.o: ..\Lib\BSP\driver\variant.h
+.\variant.o: C:\Keil_v5\ARM\CMSIS\Include\core_cm4.h
