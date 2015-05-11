@@ -1,9 +1,0 @@
-.\rsi_bootup_config.o: ..\Lib\rsi_wifi_apis\core\src\rsi_bootup_config.c
-.\rsi_bootup_config.o: ..\Lib\rsi_wifi_apis\core\include\rsi_global.h
-.\rsi_bootup_config.o: ..\Lib\rsi_wifi_apis\hal\include\rsi_hal.h
-.\rsi_bootup_config.o: ..\Lib\rsi_wifi_apis\core\include\rsi_global.h
-.\rsi_bootup_config.o: ..\Lib\rsi_wifi_apis\hal\include\platform_specific.h
-.\rsi_bootup_config.o: ..\Lib\rsi_wifi_apis\ref_apps\include\rsi_config.h
-.\rsi_bootup_config.o: ..\Lib\rsi_wifi_apis\core\include\rsi_api.h
-.\rsi_bootup_config.o: ..\Lib\rsi_wifi_apis\ref_apps\include\rsi_app_util.h
-.\rsi_bootup_config.o: ..\Lib\rsi_wifi_apis\ref_apps\include\rsi_config.h

@@ -1,3 +1,26 @@
-*.o
-*.swp
 *.vim
+
+# Many of the file descriptions were pulled from
+#   http://www.keil.com/support/man/docs/uv4/uv4_b_filetypes.htm
+
+*.bak
+*.htm
+*.uvgui.*
+*.uvguix.*
+*.uvopt
+.DS_Store
+desktop.ini
+
+*.axf
+*.dep
+*.crf
+*.lnp
+*.d
+*.lst
+*.map
+*.axf       
+*.obj       
+*.o
+*.i
+
+*.swp

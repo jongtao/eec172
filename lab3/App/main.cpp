@@ -54,6 +54,11 @@ void printString(uint16_t xCoord, uint16_t yCoord, char* myString)
 		tft.write(*(temp++));
 } // printString()
 
+
+/* Input frame format
+pressing | addr | command
+*/
+
 void init_master(void)
 {
 	/*  TESTING TO GET ADDRESSES
@@ -152,6 +157,17 @@ int main(void)
 
 	for(;;)
 	{
+		data[0]=key.pressing;
+		data[1]=key.addr;
+		data[2]=key.cmd;
+
+		WyzBee_SPPTransfer
+		(
+		 (uint8*)"00:23:A7:80:59:C8",
+		 (uint8*)data,
+		 (uint16)3
+		); // send seed
+
 		if(key.pressing)
 			GpioPut(P42, 0); // LED
 		else
@@ -171,6 +187,43 @@ int main(void)
 	printString(0, 0, (char*)"LAB3 Thing 2");
 	init_slave();
 
+	unsigned seed = 0;
+	uint32_t d;
+	uint8 data[128];
+
+	WyzBee_SPPReceive(data, (uint16)4);
+	seed = data[3];
+	seed <<= 8;
+	seed |= data[2];
+	seed <<= 8;
+	seed |= data[2];
+	seed <<= 8;
+	seed |= data[0];
+	//printString(0, 0, (char*)data);
+
+	game_init(&tft,&key,seed);
+
+	for(;;)
+	{
+		WyzBee_SPPReceive(data, (uint16)3); // send seed
+
+		key.pressing=data[0];
+		key.addr=data[1];
+		key.cmd=data[2];
+
+		if(key.pressing)
+			GpioPut(P42, 0); // LED
+		else
+			GpioPut(P42, 1); // LED
+
+		game_update();
+
+		for(d=0;d<0xFFFF;d++); // delay
+
+		//sprintf(string, "Addr:%02X\nCmd:%02X", key.addr, key.cmd);
+		//printString(0, 0, string);
+	} // main loop
+	
 
 #endif
 
