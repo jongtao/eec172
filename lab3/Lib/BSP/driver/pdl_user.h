@@ -132,7 +132,7 @@
 // External Interrupts
 #define PDL_PERIPHERAL_ENABLE_EXINT0            PDL_OFF
 #define PDL_PERIPHERAL_ENABLE_EXINT1            PDL_OFF
-#define PDL_PERIPHERAL_ENABLE_EXINT2            PDL_OFF
+#define PDL_PERIPHERAL_ENABLE_EXINT2            PDL_ON
 #define PDL_PERIPHERAL_ENABLE_EXINT3            PDL_OFF
 #define PDL_PERIPHERAL_ENABLE_EXINT4            PDL_OFF
 #define PDL_PERIPHERAL_ENABLE_EXINT5            PDL_OFF
@@ -214,7 +214,7 @@
 #define PDL_PERIPHERAL_ENABLE_PPG               PDL_OFF   
                                                 
 // NMI                                          
-#define PDL_PERIPHERAL_ENABLE_NMI               PDL_OFF
+#define PDL_PERIPHERAL_ENABLE_NMI               PDL_ON
 
 // Quad Decoder
 #define PDL_PERIPHERAL_ENABLE_QPRC0             PDL_OFF
@@ -467,7 +467,7 @@
 #define PDL_INTERRUPT_ENABLE_MFT2_ICU          PDL_OFF
 
 // NMI
-#define PDL_INTERRUPT_ENABLE_NMI               PDL_OFF
+#define PDL_INTERRUPT_ENABLE_NMI               PDL_ON
    
 // PPG
 #define PDL_INTERRUPT_ENABLE_PPG00_02_04       PDL_OFF
@@ -711,7 +711,7 @@
 // EXINT
 #define PDL_DSTC_ENABLE_EXTINT0                 PDL_OFF
 #define PDL_DSTC_ENABLE_EXTINT1                 PDL_OFF
-#define PDL_DSTC_ENABLE_EXTINT2                 PDL_OFF
+#define PDL_DSTC_ENABLE_EXTINT2                 PDL_ON
 #define PDL_DSTC_ENABLE_EXTINT3                 PDL_OFF
 #define PDL_DSTC_ENABLE_EXTINT4                 PDL_OFF
 #define PDL_DSTC_ENABLE_EXTINT5                 PDL_OFF

@@ -1402,13 +1402,14 @@ uint16 WyzBee_SPPTransfer (uint8  *p_remote_addr, uint8  *p_data, uint16  data_l
     //rsi_bt_AppControlBlock.PacketPending = RSI_FALSE;
     //rsi_irq_enable();
     status = rsi_bt_spp_app_transfer(&spp_tx);
+	/*	
     status = RSI_BT_GetRespPayload (rsi_bt_AppControlBlock.ResponseFrame);
     if ((*(uint16 *)rsi_bt_AppControlBlock.ResponseFrame->Status       ==                       0) &&
         (*(uint16 *)rsi_bt_AppControlBlock.ResponseFrame->ResponseCode == RSI_BT_RSP_SPP_TRANSFER)) {
 
         status =  *((uint16 *)rsi_bt_AppControlBlock.ResponseFrame->Status);
     }
-   
+   */
     return status;
 }
 
@@ -1440,7 +1441,7 @@ uint16 WyzBee_SPPReceive (uint8  *p_data, uint16  data_size)
    //rsi_irq_enable();
     
     status = RSI_BT_GetRespPayload (rsi_bt_AppControlBlock.ResponseFrame);
-    if ((status == 0) &&
+		if ((status == 0) &&
        (*(uint16 *)rsi_bt_AppControlBlock.ResponseFrame->Status == (uint16)0)) {
 			
 		    if ((*(uint16 *)rsi_bt_AppControlBlock.ResponseFrame->ResponseCode) == RSI_BT_EVT_SPP_RECEIVE){

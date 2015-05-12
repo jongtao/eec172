@@ -633,7 +633,7 @@ extern "C"
     #define IRQ010SEL_IRQHandler(void)         IRQ010_Handler(void) ///< Interrupt Source Selection 10
     #define EXINT0_IRQHandler(void)            IRQ011_Handler(void) ///< External Pin Interrupt Ch. 0
     #define EXINT1_IRQHandler(void)            IRQ012_Handler(void) ///< External Pin Interrupt Ch. 1
-    #define EXINT2_IRQHandler(void)            IRQ013_Handler(void) ///< External Pin Interrupt Ch. 2
+   // #define EXINT2_IRQHandler(void)            IRQ013_Handler(void) ///< External Pin Interrupt Ch. 2
     #define EXINT3_IRQHandler(void)            IRQ014_Handler(void) ///< External Pin Interrupt Ch. 3
     #define EXINT4_IRQHandler(void)            IRQ015_Handler(void) ///< External Pin Interrupt Ch. 4
     #define EXINT5_IRQHandler(void)            IRQ016_Handler(void) ///< External Pin Interrupt Ch. 5

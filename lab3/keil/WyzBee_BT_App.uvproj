@@ -426,6 +426,16 @@
               <FileType>8</FileType>
               <FilePath>..\App\main.cpp</FilePath>
             </File>
+            <File>
+              <FileName>infrared.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\infrared.c</FilePath>
+            </File>
+            <File>
+              <FileName>game.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\App\game.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -520,26 +530,6 @@
               <FileName>WyzBee_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Lib\WyzBee_SPI\WyzBee_spi.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>IR</GroupName>
-          <Files>
-            <File>
-              <FileName>IRremote.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Lib\IR_Library\src\IRremote.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>text_print.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Lib\IR_Library\src\text_print.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TimerInit.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lib\IR_Library\src\TimerInit.c</FilePath>
             </File>
           </Files>
         </Group>

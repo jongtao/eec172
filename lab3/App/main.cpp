@@ -19,9 +19,9 @@
 #include "infrared.h"
 #include "game.h"
 
-#define MASTER
+//#define MASTER
 
-// Board 047 address: 00:23:A7:80:59:8A
+// Board 047 (Master) address: 00:23:A7:80:59:8A
 // Board 048 address: 00:23:A7:80:59:C8
 
 extern Adafruit_SSD1351 tft = Adafruit_SSD1351(); //@  OLED class variable
@@ -112,6 +112,7 @@ int main(void)
 	char string[32];
 	
 	sys_ticks_init();
+	
 	result = WyzBee_BT_init();
 	
 	// Set initial BT conditions
@@ -139,6 +140,7 @@ int main(void)
 	uint8 data[128];
 	// IR init
 	infrared_init();
+	GpioPut(P42, 0);
 	while(!key.pressing) seed++; // get seed based on user's input
 	
 	data[0] = seed & 0x000000FF;
@@ -146,14 +148,18 @@ int main(void)
 	data[2] = (seed & 0x00FF0000)>>16;
 	data[3] = (seed & 0xFF000000)>>24;
 
+
 	WyzBee_SPPTransfer
 	(
 		(uint8*)"00:23:A7:80:59:C8",
 	  (uint8*)data,
 	  (uint16)4
 	); // send seed
+	data[4] = 0;
+	//printString(0, 0, (char*)data);
 
 	game_init(&tft,&key,seed);
+	for(d=0;d<0xFFFFFF;d++); // delay
 
 	for(;;)
 	{
@@ -166,7 +172,7 @@ int main(void)
 		 (uint8*)"00:23:A7:80:59:C8",
 		 (uint8*)data,
 		 (uint16)3
-		); // send seed
+		); // send key
 
 		if(key.pressing)
 			GpioPut(P42, 0); // LED
@@ -175,7 +181,7 @@ int main(void)
 
 		game_update();
 
-		for(d=0;d<0xFFFF;d++); // delay
+		//for(d=0;d<0xFFFF;d++); // delay
 
 		//sprintf(string, "Addr:%02X\nCmd:%02X", key.addr, key.cmd);
 		//printString(0, 0, string);
@@ -186,26 +192,33 @@ int main(void)
 #else
 	printString(0, 0, (char*)"LAB3 Thing 2");
 	init_slave();
+	GpioPut(P42, 0);
 
 	unsigned seed = 0;
 	uint32_t d;
 	uint8 data[128];
+	uint8_t ret;
 
-	WyzBee_SPPReceive(data, (uint16)4);
+	for(d=0;d<0xFFFF;d++); // delay
+
+	ret = WyzBee_SPPReceive(data, (uint16)4);
+
 	seed = data[3];
 	seed <<= 8;
 	seed |= data[2];
 	seed <<= 8;
-	seed |= data[2];
+	seed |= data[1];
 	seed <<= 8;
 	seed |= data[0];
 	//printString(0, 0, (char*)data);
 
 	game_init(&tft,&key,seed);
 
+	for(d=0;d<0xFFFF;d++); // delay
 	for(;;)
 	{
-		WyzBee_SPPReceive(data, (uint16)3); // send seed
+
+		WyzBee_SPPReceive(data, (uint16)3); // receive command
 
 		key.pressing=data[0];
 		key.addr=data[1];
