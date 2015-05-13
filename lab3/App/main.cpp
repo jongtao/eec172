@@ -15,13 +15,12 @@
 #include <wyzbee_bt.h>
 #include <pdl.h>
 #include <delay.h>
-
 #include "infrared.h"
 #include "game.h"
 
-//#define MASTER
+#define MASTER
 
-// Board 047 (Master) address: 00:23:A7:80:59:8A
+// Board 047 address: 00:23:A7:80:59:8A
 // Board 048 address: 00:23:A7:80:59:C8
 
 extern Adafruit_SSD1351 tft = Adafruit_SSD1351(); //@  OLED class variable
@@ -38,11 +37,8 @@ WyzBeeSpi_Config_t  config_stc={
 		NULL
 };
 
-
 rsi_bt_event_inquiry_response rsi[4];
 //RSI_BT_RESPONSE response;
-
-
 
 // Prints string starting at (xCoord, yCoord)
 void printString(uint16_t xCoord, uint16_t yCoord, char* myString)
@@ -53,11 +49,6 @@ void printString(uint16_t xCoord, uint16_t yCoord, char* myString)
 	while(*temp != '\0')
 		tft.write(*(temp++));
 } // printString()
-
-
-/* Input frame format
-pressing | addr | command
-*/
 
 void init_master(void)
 {
@@ -78,9 +69,7 @@ void init_master(void)
 	                            (uint8*)"HELLO WORLD",
 	                            (uint16)11);
 	*/
-} // init_master()
-
-
+}
 
 void init_slave(void)
 {
@@ -101,7 +90,7 @@ void init_slave(void)
 	WyzBee_SPPReceive(data, (uint16)12);
 	printString(0, 0, (char*)data);
 	*/
-} // init_slave()
+}
 
 
 
@@ -113,117 +102,36 @@ int main(void)
 	
 	sys_ticks_init();
 	
-	result = WyzBee_BT_init();
-	
 	// Set initial BT conditions
+	result = WyzBee_BT_init();
 	WyzBee_SetDiscoverMode(1, 5000);
 	WyzBee_SetConnMode(1);
 	WyzBee_InitSppProfile();
 	
 	// Enable LEDs
-	GpioInitOut(P42, 1);
-	GpioInitOut(P43, 1);
+	GpioInitOut(P42, 1); // LED
+	GpioInitOut(P43, 1); // LED
 	
-	// init screen
+	// Initialize Screen
 	WyzBeeSpi_Init(&config_stc);
 	tft.begin();
 	tft.fillScreen(BLACK);
 	tft.setTextColor(WHITE, BLACK);
 	tft.setTextSize(2);
-
+	
 #ifdef MASTER
 	printString(0, 0, (char*)"LAB3 Thing 1");
 	init_master();
-
+	
 	unsigned seed = 0;
 	uint32_t d;
-	uint8 data[128];
-	// IR init
 	infrared_init();
-	GpioPut(P42, 0);
 	while(!key.pressing) seed++; // get seed based on user's input
-	
-	data[0] = seed & 0x000000FF;
-	data[1] = (seed & 0x0000FF00)>>8;
-	data[2] = (seed & 0x00FF0000)>>16;
-	data[3] = (seed & 0xFF000000)>>24;
-
-
-	WyzBee_SPPTransfer
-	(
-		(uint8*)"00:23:A7:80:59:C8",
-	  (uint8*)data,
-	  (uint16)4
-	); // send seed
-	data[4] = 0;
-	//printString(0, 0, (char*)data);
-
-	game_init(&tft,&key,seed);
-	for(d=0;d<0xFFFFFF;d++); // delay
-
-	for(;;)
-	{
-		data[0]=key.pressing;
-		data[1]=key.addr;
-		data[2]=key.cmd;
-
-		WyzBee_SPPTransfer
-		(
-		 (uint8*)"00:23:A7:80:59:C8",
-		 (uint8*)data,
-		 (uint16)3
-		); // send key
-
-		if(key.pressing)
-			GpioPut(P42, 0); // LED
-		else
-			GpioPut(P42, 1); // LED
-
-		game_update();
-
-		//for(d=0;d<0xFFFF;d++); // delay
-
-		//sprintf(string, "Addr:%02X\nCmd:%02X", key.addr, key.cmd);
-		//printString(0, 0, string);
-	} // main loop
-	
-
-
-#else
-	printString(0, 0, (char*)"LAB3 Thing 2");
-	init_slave();
-	GpioPut(P42, 0);
-
-	unsigned seed = 0;
-	uint32_t d;
-	uint8 data[128];
-	uint8_t ret;
-
-	for(d=0;d<0xFFFF;d++); // delay
-
-	ret = WyzBee_SPPReceive(data, (uint16)4);
-
-	seed = data[3];
-	seed <<= 8;
-	seed |= data[2];
-	seed <<= 8;
-	seed |= data[1];
-	seed <<= 8;
-	seed |= data[0];
-	//printString(0, 0, (char*)data);
 
 	game_init(&tft,&key,seed);
 
-	for(d=0;d<0xFFFF;d++); // delay
 	for(;;)
 	{
-
-		WyzBee_SPPReceive(data, (uint16)3); // receive command
-
-		key.pressing=data[0];
-		key.addr=data[1];
-		key.cmd=data[2];
-
 		if(key.pressing)
 			GpioPut(P42, 0); // LED
 		else
@@ -232,21 +140,41 @@ int main(void)
 		game_update();
 
 		for(d=0;d<0xFFFF;d++); // delay
-
-		//sprintf(string, "Addr:%02X\nCmd:%02X", key.addr, key.cmd);
-		//printString(0, 0, string);
 	} // main loop
 	
+	
+	
+#else // NOT MASTER
+	printString(0, 0, (char*)"LAB3 Thing 2");
+	init_slave();
+	
+	unsigned seed = 0;
+	uint32_t d;
+	button input;
+	game_init(&tft,&key,seed);
 
-#endif
+	for(;;)
+	{
+		if(button.pressing)
+			GpioPut(P42, 0); // LED
+		else
+			GpioPut(P42, 1); // LED
+
+		game_update();
+
+		for(d=0;d<0xFFFF;d++); // delay
+	} // main loop
+#endif // MASTER
+
+
+
+
 
 	/*
 	WyzBee_Inquiry(0, 3000);
 	RSI_BT_GetRespPayload(&response);
 	AddScanresults(&rsi, 1, &(response.uCmdRspPayLoad.uInqResp));
-	*/
 	
-	/*
 	do
 	{
 		result = WyzBee_GetInquiryResults(rsi, 4);
@@ -259,4 +187,4 @@ int main(void)
 	GpioPut(P43, 1);
 	*/
 	return 0;
-} // main()
+}

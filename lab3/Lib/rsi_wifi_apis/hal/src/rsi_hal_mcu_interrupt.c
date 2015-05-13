@@ -69,13 +69,13 @@ void  Intr_isr (void)
  */
 void rsi_irq_start(void)
 {
-		stc_exint_config_t stcExtIntConfig;
+		extern stc_exint_config_t pstcConfig;
 
-  PDL_ZERO_STRUCT(stcExtIntConfig);
+  //PDL_ZERO_STRUCT(pstcConfig);
 
-  stcExtIntConfig.abEnable[RSI_SPI_INTR_NBR] = TRUE;
-  stcExtIntConfig.aenLevel[RSI_SPI_INTR_NBR] = ExIntHighLevel;
-  stcExtIntConfig.apfnExintCallback[RSI_SPI_INTR_NBR] = &Intr_isr;
+  pstcConfig.abEnable[RSI_SPI_INTR_NBR] = TRUE;
+  pstcConfig.aenLevel[RSI_SPI_INTR_NBR] = ExIntHighLevel;
+  pstcConfig.apfnExintCallback[RSI_SPI_INTR_NBR] = &Intr_isr; 
 
 
   // Set pin function before enabling external interrupt channel!
@@ -83,7 +83,7 @@ void rsi_irq_start(void)
 	SetPinFunc_INT08_1(0u); 
 	
 
-  Exint_Init(&stcExtIntConfig);
+  Exint_Init(&pstcConfig);
   Exint_EnableChannel(RSI_SPI_INTR_NBR);
 
 	return;
