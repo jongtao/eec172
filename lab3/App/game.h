@@ -12,8 +12,9 @@ extern "C" {
 
 #define SCALE 8
 
+//16x16 fills the screen
 #define WORLD_HEIGHT 16
-#define WORLD_LENGTH 16
+#define WORLD_LENGTH 32
 
 #define SCREEN_HEIGHT 128
 #define SCREEN_WIDTH 128
@@ -38,9 +39,10 @@ typedef enum
 
 void generate_world(int seed);
 
-void draw_world(uint8_t x, uint8_t y);
+void draw_world(uint16_t x, uint16_t y); // must be multiples of 8
 void draw_man(void);
-void game_update(void);
+//void game_update(void);
+void game_update(uint16_t x, uint16_t y);
 void update_action(void);
 void update_dig(void);
 void check_horizontal(void);

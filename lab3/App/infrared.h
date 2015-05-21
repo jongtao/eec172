@@ -6,6 +6,7 @@ extern "C" {
 #endif
 
 #include "pdl.h"
+#include <WyzBee_ext.h>
 
 
 // TIMER Constants

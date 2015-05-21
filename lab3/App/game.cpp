@@ -61,7 +61,7 @@ void generate_world(int seed)
 } // generate_world()
 
 
-void draw_world(uint8_t x, uint8_t y)
+void draw_world(uint16_t x, uint16_t y)
 {
 	uint8_t i, j; // start drawing from x, y
 
@@ -89,20 +89,24 @@ void draw_world(uint8_t x, uint8_t y)
 
 
 
-void draw_man(void)
+//void draw_man(void)
+void draw_man(uint16_t x, uint16_t y)
 {
-	screen->fillRect(x_pos,y_pos,MAN_WIDTH,MAN_HEAD,0xFFE0);
-	screen->fillRect(x_pos,y_pos+MAN_HEAD,MAN_WIDTH,MAN_HEIGHT-MAN_HEAD,0xF800);
+	screen->fillRect(-x+x_pos,-y+y_pos,MAN_WIDTH,MAN_HEAD,0xFFE0);
+	screen->fillRect(-x+x_pos,-y+y_pos+MAN_HEAD,MAN_WIDTH,MAN_HEIGHT-MAN_HEAD,0xF800);
 } // draw_man()
 
 
 
-void game_update(void)
+void game_update(uint16_t x, uint16_t y)
+//void game_update(void)
 {
 	update_action();
 	update_dig();
-	draw_world(0,0);
-	draw_man();
+	//draw_world(0,0);
+	draw_world(x,y);
+	//draw_man();
+	draw_man(x,y);
 } //update()
 
 
@@ -301,7 +305,7 @@ void game_init(Adafruit_SSD1351* handle, Button* button, unsigned seed)
 
 	generate_world(seed);
 
-	x_pos = POS_LENGTH/2;
+	x_pos = POS_LENGTH/4;
 	y_pos = -MAN_HEIGHT;
 	x_vel = y_vel = 0;
 

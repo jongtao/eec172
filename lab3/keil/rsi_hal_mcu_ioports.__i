@@ -1,6 +1,0 @@
--c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I..\common -I..\Lib\BSP -I..\Lib\BSP\driver -I..\Lib\IR_Library\inc -I..\Lib\rsi_bt_apis\core\include -I..\Lib\rsi_wifi_apis\ref_apps\include -I..\Lib\rsi_wifi_apis\hal\include -I..\Lib\rsi_wifi_apis\hal\SPI -I..\Lib\rsi_wifi_apis\intf\spi\include -I..\Lib\WyzBee_oled -I..\Lib\WyzBee_SPI -I..\Lib\BSP\driver\dt -I..\Lib\BSP\driver\gpio -I..\Lib\BSP\driver\mfs -I..\Lib\rsi_wifi_apis\core\include -I..\Lib\rsi_bt_apis\ref_apps\include -I..\Lib\BSP\driver\exint -I..\Lib\WyzBee_BT
--I C:\Keil_v5\ARM\RV31\INC
--I C:\Keil_v5\ARM\CMSIS\Include
--I C:\Keil_v5\ARM\Inc\Fujitsu\MB9B560R
--DMB9BF568N
--o .\rsi_hal_mcu_ioports.o --omf_browse .\rsi_hal_mcu_ioports.crf --depend .\rsi_hal_mcu_ioports.d "..\Lib\rsi_wifi_apis\hal\src\rsi_hal_mcu_ioports.c"

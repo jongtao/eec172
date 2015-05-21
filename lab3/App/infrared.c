@@ -2,8 +2,13 @@
 
 
 
-stc_exint_config_t exint_config; // External Int
+//stc_exint_config_t exint_config; // External Int
+WyzBee_exint_config_t WyzBeeExtIntConfig;
 stc_dt_channel_config_t dt_config; // Timer
+
+
+
+
 
 // State machine
 uint8_t state, is_first;
@@ -20,8 +25,8 @@ volatile uint32_t buffer; // test buffer
 void IR_ISR(void)
 {
 	uint32_t tmp_time;
-
-	if(exint_config.aenLevel[IR_INT_CHAN] == ExIntFallingEdge) // if logical rise
+	//if(exint_config.aenLevel[IR_INT_CHAN] == ExIntFallingEdge) // if logical rise
+	if(WyzBeeExtIntConfig.aenLevel[IR_INT_CHAN] == ExIntFallingEdge)
 	{
 		// Evaluate Time
 		if(!is_first) // not the first cycle
@@ -105,12 +110,18 @@ void IR_ISR(void)
 		Dt_WriteLoadVal(TIMEOUT, DtChannel0); // ~0.21 Seconds Timeout
 		Dt_EnableCount(DtChannel0);
 
+/*
 		// Set interrupt to Rising (logical fall)
 		Exint_DisableChannel(IR_INT_CHAN);
 		exint_config.aenLevel[IR_INT_CHAN] = ExIntRisingEdge;
 		Exint_Init(&exint_config);
 		Exint_EnableChannel(IR_INT_CHAN);
-
+*/
+		WyzBee_Exint_DisableChannel(IR_INT_CHAN);
+		WyzBeeExtIntConfig.aenLevel[IR_INT_CHAN] = ExIntRisingEdge;
+		WyzBee_Exint_IR_Init(&WyzBeeExtIntConfig);
+		WyzBee_Exint_EnableChannel(IR_INT_CHAN);
+		
 		prev_t = TIMEOUT;
 	} // if Falling Edge
 	else // Rising Edge
@@ -118,12 +129,18 @@ void IR_ISR(void)
 		tmp_time = Dt_ReadCurCntVal(DtChannel0);
 		delta_mark = prev_t - tmp_time;	
 		prev_t = tmp_time;
-
+/*
 		// Set interrupt to Falling (logical rise)
 		Exint_DisableChannel(IR_INT_CHAN);
 		exint_config.aenLevel[IR_INT_CHAN] = ExIntFallingEdge;
 		Exint_Init(&exint_config);
 		Exint_EnableChannel(IR_INT_CHAN);
+*/
+		WyzBee_Exint_DisableChannel(IR_INT_CHAN);
+		WyzBeeExtIntConfig.aenLevel[IR_INT_CHAN] = ExIntFallingEdge;
+		WyzBee_Exint_IR_Init(&WyzBeeExtIntConfig);
+		WyzBee_Exint_EnableChannel(IR_INT_CHAN);
+		
 	} // else Rising Edge
 
 } // IR_ISR()
@@ -160,7 +177,6 @@ uint8_t extract(uint32_t word, volatile Button* button)
 } // extract()
 
 
-
 void infrared_init(void)
 {
 	// State Machine
@@ -171,6 +187,7 @@ void infrared_init(void)
 	// Event Queue	
 	key.pressing = 0; // button is not pressed continuously
 
+/*
 	// External interrupt on INT02_1
   PDL_ZERO_STRUCT(exint_config);
 	exint_config.abEnable[IR_INT_CHAN] = TRUE;
@@ -180,7 +197,15 @@ void infrared_init(void)
   SetPinFunc_INT02_1(0u);
   Exint_Init(&exint_config);
   Exint_EnableChannel(IR_INT_CHAN);
-	
+	*/
+	WyzBee_PDL_ZERO(WyzBeeExtIntConfig);
+	WyzBeeExtIntConfig.abEnable[IR_INT_CHAN] = TRUE;
+	WyzBeeExtIntConfig.aenLevel[IR_INT_CHAN] = ExIntFallingEdge;
+	WyzBeeExtIntConfig.apfnExintCallback[IR_INT_CHAN] = &IR_ISR;
+	WyzBee_Exint_IR_Init(&WyzBeeExtIntConfig);
+	WyzBee_Exint_EnableChannel(IR_INT_CHAN);
+
+
 	// Timer
 	// 312500 with 256 prescale = 1 second
 	// Clock = 80Mhz
@@ -195,3 +220,4 @@ void infrared_init(void)
 	Dt_WriteLoadVal(TIMEOUT, DtChannel0); // ~0.21 Seconds Timeout
 	Dt_EnableInt(&timer_ISR, DtChannel0); // Timeout Interrupt
 } // infrared_init();
+

@@ -633,7 +633,7 @@ extern "C"
     #define IRQ010SEL_IRQHandler(void)         IRQ010_Handler(void) ///< Interrupt Source Selection 10
     #define EXINT0_IRQHandler(void)            IRQ011_Handler(void) ///< External Pin Interrupt Ch. 0
     #define EXINT1_IRQHandler(void)            IRQ012_Handler(void) ///< External Pin Interrupt Ch. 1
-   // #define EXINT2_IRQHandler(void)            IRQ013_Handler(void) ///< External Pin Interrupt Ch. 2
+    //#define EXINT2_IRQHandler(void)            IRQ013_Handler(void) ///< External Pin Interrupt Ch. 2
     #define EXINT3_IRQHandler(void)            IRQ014_Handler(void) ///< External Pin Interrupt Ch. 3
     #define EXINT4_IRQHandler(void)            IRQ015_Handler(void) ///< External Pin Interrupt Ch. 4
     #define EXINT5_IRQHandler(void)            IRQ016_Handler(void) ///< External Pin Interrupt Ch. 5
@@ -694,8 +694,8 @@ extern "C"
     #define MFS5_TX_IRQHandler(void)           IRQ071_Handler(void) ///< Multi Function Serial Reception/Status Ch. 5
     #define MFS6_RX_IRQHandler(void)           IRQ072_Handler(void) ///< Multi Function Serial Reception Ch. 6
     #define MFS6_TX_IRQHandler(void)           IRQ073_Handler(void) ///< Multi Function Serial Reception/Status Ch. 6
-    #define MFS7_RX_IRQHandler(void)           IRQ074_Handler(void) ///< Multi Function Serial Reception Ch. 7
-    #define MFS7_TX_IRQHandler(void)           IRQ075_Handler(void) ///< Multi Function Serial Reception/Status Ch. 7
+    //#define MFS7_RX_IRQHandler(void)           IRQ074_Handler(void) ///< Multi Function Serial Reception Ch. 7
+    //#define MFS7_TX_IRQHandler(void)           IRQ075_Handler(void) ///< Multi Function Serial Reception/Status Ch. 7
     #define ADC0_IRQHandler(void)              IRQ076_Handler(void) ///< Analog Digital Converter Unit 0
     #define ADC1_IRQHandler(void)              IRQ077_Handler(void) ///< Analog Digital Converter Unit 1
     #define USB0_IRQHandler(void)              IRQ078_Handler(void) ///< USB Ch. 0 (DRQ of endpoint 1 to 5) 

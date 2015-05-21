@@ -363,7 +363,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\common;..\Lib\BSP;..\Lib\BSP\driver;..\Lib\IR_Library\inc;..\Lib\rsi_bt_apis\core\include;..\Lib\rsi_wifi_apis\ref_apps\include;..\Lib\rsi_wifi_apis\hal\include;..\Lib\rsi_wifi_apis\hal\SPI;..\Lib\rsi_wifi_apis\intf\spi\include;..\Lib\WyzBee_oled;..\Lib\WyzBee_SPI;..\Lib\BSP\driver\dt;..\Lib\BSP\driver\gpio;..\Lib\BSP\driver\mfs;..\Lib\rsi_wifi_apis\core\include;..\Lib\rsi_bt_apis\ref_apps\include;..\Lib\BSP\driver\exint;..\Lib\WyzBee_BT</IncludePath>
+              <IncludePath>..\common;..\Lib\BSP;..\Lib\BSP\driver;..\Lib\IR_Library\inc;..\Lib\rsi_bt_apis\core\include;..\Lib\rsi_wifi_apis\ref_apps\include;..\Lib\rsi_wifi_apis\hal\include;..\Lib\rsi_wifi_apis\hal\SPI;..\Lib\rsi_wifi_apis\intf\spi\include;..\Lib\WyzBee_oled;..\Lib\WyzBee_SPI;..\Lib\BSP\driver\dt;..\Lib\BSP\driver\gpio;..\Lib\BSP\driver\mfs;..\Lib\rsi_wifi_apis\core\include;..\Lib\rsi_bt_apis\ref_apps\include;..\Lib\BSP\driver\exint;..\Lib\WyzBee_BT;..\Lib\WyzBee_gpio;..\Lib\WyzBee_timer;..\Lib\WyzBee_ext</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -650,6 +650,41 @@
               <FileName>wyzbee_bt.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Lib\WyzBee_BT\wyzbee_bt.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>WyzBee_gpio</GroupName>
+          <Files>
+            <File>
+              <FileName>WyzBee.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Lib\WyzBee_gpio\WyzBee.h</FilePath>
+            </File>
+            <File>
+              <FileName>WyzBee_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lib\WyzBee_gpio\WyzBee_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>WyzBee_gpio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Lib\WyzBee_gpio\WyzBee_gpio.h</FilePath>
+            </File>
+            <File>
+              <FileName>Wyzbee_kit.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Lib\WyzBee_gpio\Wyzbee_kit.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>WyzBee_ext</GroupName>
+          <Files>
+            <File>
+              <FileName>WyzBee_ext.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lib\WyzBee_ext\WyzBee_ext.c</FilePath>
             </File>
           </Files>
         </Group>
