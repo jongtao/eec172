@@ -170,7 +170,7 @@ int main(void)
 						uint8  p_headers[1024] =
 							"Accept: application/json\r\n"
 							"Content-Type: application/json\r\n"
-							"X-Postmark-Server-Token: 8e7246db-7f94-41e0-98bd-c95f09ce4643\r\n";
+							"X-Postmark-Server-Token: 8e7246db-7f94-41e0-98bd-c95f09ce4643\r\n\r\n";
 						uint8  p_data[1024] = "\0";
 						
 						packet.p_username = NULL;//p_username;
@@ -226,11 +226,11 @@ int main(void)
 									
 											//strcpy(url, "https://api.postmarkapp.com/email");
 											strcpy(url, "https://posttestserver.com/post.php");
-											status = WyzBeeWiFi_HttpPost(url, &packet);
+											//status = WyzBeeWiFi_HttpPost(url, &packet);
 												
-												//status = WyzBeeWiFi_HttpGet(url, (HttpRequest*)NULL, array, sizeof(array));
+										//status = WyzBeeWiFi_HttpGet(url, (HttpRequest*)NULL, array, sizeof(array));
+										status = WyzBeeWiFi_HttpGet(url, &packet, array, sizeof(array));
 											
-												ret = ret + 1;
 											state = TO;
 										}; // switch state for printing
 										oled.fillScreen(BLACK);

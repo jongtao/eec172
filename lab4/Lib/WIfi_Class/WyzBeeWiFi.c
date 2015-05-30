@@ -1201,6 +1201,7 @@ int16  WyzBeeWiFi_HttpGet(int8  *p_http_url, HttpRequest  *p_http_req, int8  *p_
 																	 
 	rsi_irq_enable();												//@ enabling interrupt
 	retval = rsi_http_get(&rsi_app_cb.rsi_strApi.uHttpGetReq);						//@ issuing post request to the RS-9113 module
+	//retval = rsi_http_post(&rsi_app_cb.rsi_strApi.uHttpPostReq);
 	if (retval == 0)
 	{
 		WyzBeeWiFi_getResponse (rsi_app_cb.uCmdRspFrame);
