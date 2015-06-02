@@ -84,8 +84,9 @@ int printToOLED(char* stringToPrint, int color, int cursorX, int cursorY){
 //static variables
 
 
-void printString(uint16_t xCoord, uint16_t yCoord, char* myString)
+void printString(uint16_t xCoord, uint16_t yCoord, char* myString, int color)
 {
+	oled.setTextColor(color, BLACK);
 	oled.setCursor(xCoord, yCoord);
 
 	char* temp = myString;
@@ -119,10 +120,11 @@ int main(void)
 	oled.setTextSize(2); //OLED set text size
 	printToOLED("It's alive", RED, 0,0);
 
-  int8 array[1024];
+  int8 array[128];
 	char URL[128] = "http://calbeedemo.appspot.com/greetings?msg=HELLO_2";
 	
 	uint8_t state = 0;
+	int cycle_delay = 0;
 	
 	memset(scan_dev,'\0',sizeof(scan_dev));
 	  if(status == 0) 
@@ -136,8 +138,8 @@ int main(void)
 						memcpy (scan_dev[ix], remote_dev[ix].ssid, strlen ((const int8 *)remote_dev[ix].ssid)); 	   //@ copying the all SSIDs into a local buffer
 					}
 					
-					status = WyzBeeWiFi_ConnectAccessPoint((int8 *)"Bacon", "nahtanojoat"); //join with access point
-					//status = WyzBeeWiFi_ConnectAccessPoint((int8 *)"EEC172", 0); //join with access point
+					//status = WyzBeeWiFi_ConnectAccessPoint((int8 *)"Bacon", "nahtanojoat"); //join with access point
+					status = WyzBeeWiFi_ConnectAccessPoint((int8 *)"EEC172", 0); //join with access point
 					
 					if (status == 0)
 					{
@@ -164,7 +166,7 @@ int main(void)
 						char to_str[64];
 						char subject_str[64];
 						
-						HttpRequest packet;
+						//HttpRequest http_req;
 						uint8  p_username[64] = "jgtao";
 						uint8  p_password[64] = "embeddedsystem";
 						uint8  p_headers[1024] =
@@ -173,16 +175,16 @@ int main(void)
 							"X-Postmark-Server-Token: 8e7246db-7f94-41e0-98bd-c95f09ce4643\r\n\r\n";
 						uint8  p_data[1024] = "\0";
 						
-						packet.p_username = NULL;//p_username;
-						packet.p_password = NULL;//p_password;
-						packet.p_headers = p_headers;
-						packet.p_data = p_data;
+						http_req.p_username = NULL;//p_username;
+						http_req.p_password = NULL;//p_password;
+						http_req.p_headers = p_headers;
+						http_req.p_data = p_data;
 						
 						int16 ret;
 						oled.fillScreen(BLACK);
 						
 						for(;;)
-						{	
+						{
 							if(key.pressing)
 							{
 								switch(key.cmd)
@@ -208,38 +210,14 @@ int main(void)
 										buffer[count] = character;
 										buffer[count+1] = 0;
 										count++;
+										sprintf(temp_string,"http://calbeedemo.appspot.com/greetings?msg=%s", buffer);
+										WyzBeeWiFi_HttpGet(temp_string, (HttpRequest*)NULL, array, sizeof(array));
 									
-									
-									
-
-										switch(state)
-										{
-											case TO: strcpy(to_str, buffer); state = SUBJECT; break;
-											case SUBJECT: strcpy(subject_str, buffer); state = MESSAGE; break;
-											case MESSAGE: // send
-												sprintf((char*)p_data,
-													"{From: 'jgtao@ucdavis.edu', "
-													"To: 'jgtao@ucdavis.edu', "
-													"Subject: 'Hello from Postmark', "
-													"HtmlBody: '<html><body>%s<br><br><br>Sent from my Embedded System</body></html>'}",
-													buffer);
-									
-											//strcpy(url, "https://api.postmarkapp.com/email");
-											strcpy(url, "https://posttestserver.com/post.php");
-											//status = WyzBeeWiFi_HttpPost(url, &packet);
-												
-										//status = WyzBeeWiFi_HttpGet(url, (HttpRequest*)NULL, array, sizeof(array));
-										status = WyzBeeWiFi_HttpGet(url, &packet, array, sizeof(array));
-											
-											state = TO;
-										}; // switch state for printing
-										oled.fillScreen(BLACK);
+									oled.fillScreen(BLACK);
 										
 										buffer[0] = 0;
 										count = 0;
-										
-										
-										
+			
 										/*
 										sprintf(temp_string,"http://calbeedemo.appspot.com/greetings?msg=%s", buffer);
 										status = WyzBeeWiFi_HttpGet(temp_string, (HttpRequest*)NULL, array, sizeof(array));
@@ -249,13 +227,19 @@ int main(void)
 								}; // swith key.cmd
 							} // if pressing
 								
-							switch(state)
+							sprintf(string,">%s%c  ", buffer, character);
+							printString(0,60,string, BLUE);
+							
+							// Print chat
+							if(key.cmd == 0x10 && key.pressing)
 							{
-								case TO: sprintf(string,"To: %s%c  ", buffer, character); break;
-								case SUBJECT: sprintf(string,"Subject: %s%c  ", buffer, character); break;
-								case MESSAGE: sprintf(string,"Message: %s%c  ", buffer, character); break;
-							}; // switch state for printing
-							printString(0,0,string);
+								strcpy(url, "http://calbeedemo.appspot.com/status");
+								//sprintf(url,"http://calbeedemo.appspot.com/greetings?msg=%s", "HERLLOWORDL");
+								memset(array, 0, sizeof (array));
+								status = WyzBeeWiFi_HttpGet(url, (HttpRequest*)NULL, array, sizeof(array));
+								printString(0,0,array, RED);
+								cycle_delay = 0;
+							}
 							
 							for(delay=0;delay<0x3FFFFF;delay++); // delayelay
 						} // main loop
