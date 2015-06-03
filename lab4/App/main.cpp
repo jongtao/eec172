@@ -262,7 +262,7 @@ int main(void)
 							buffer_index += strlen(chat_log[chat_index]);
 							// string already ends a newline followed by a null termination
 						}
-						oled.fillRect(0, 0, 64, 118, BLACK); // background
+						oled.fillRect(0, 0, 192, 118, BLACK); // background
 						printString(0,0,chat_buffer, WHITE);
 					} // if new message
 
