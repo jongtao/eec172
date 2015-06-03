@@ -21,7 +21,8 @@
 
 #include <infrared.h>
 
-#define CHAT_LEN 16
+#define CHAT_LEN 10
+#define MAX_DELAY 20
 
 
 rsi_scanInfo  				remote_dev[RSI_AP_SCANNED_MAX];
@@ -30,7 +31,7 @@ volatile 	uint8 			fflag = 0;
 volatile 	uint32_t 		time = 0;
 
 int8     							scan_dev[11][34];
-int8     							message[50];
+//int8     							message[50];
 //int8     							http_resp[1000];
 int8   								*p_ssid_name;
 int8								  status, ix, nbr_scan_devs;
@@ -38,13 +39,13 @@ int8								  status, ix, nbr_scan_devs;
 err_t 								err;
 
 
-//Function Prototypes
-int printToOLED(char* stringToPrint, int color, int cursorX, int cursorY);
 
 extern Adafruit_SSD1351 oled = Adafruit_SSD1351(); //@  OLED class variable
 
-//SPI Specification Initialization Block
-WyzBeeSpi_Config_t  config_stc={
+
+
+WyzBeeSpi_Config_t config_stc = //SPI Specification Initialization Block
+{
 		4000000,
 		SpiMaster,
 		SpiSyncWaitZero,
@@ -56,34 +57,6 @@ WyzBeeSpi_Config_t  config_stc={
 		NULL
 };
 
-//Insert function to print to OLED display (Lab1).
-int printToOLED(char* stringToPrint, int color, int cursorX, int cursorY){
-//#define	BLACK           0x0000
-//#define	BLUE            0x001F
-//#define	RED             0xF800
-//#define	GREEN           0x07E0
-//#define CYAN            0x07FF
-//#define MAGENTA         0xF81F
-//#define YELLOW          0xFFE0
-//#define WHITE           0xFFFF
-	
-	//set color of text
-	oled.setTextColor(color, BLACK);
-	
-	//get string lendth
-	int stringLength = strlen(stringToPrint);
-	//set the print cursor to the inital location
-	oled.setCursor(cursorX,cursorY);
-	//print the string to the screen moving the cursor each time
-	for(int i=0; i < stringLength; i++){
-			oled.setCursor(10*i+cursorX,cursorY); //set the print cursor to the inital location
-			oled.write(stringToPrint[i]); //write a char to screen
-	}
-	
-	return 0;
-}
-
-//static variables
 
 
 void printString(uint16_t xCoord, uint16_t yCoord, char* myString, int color)
@@ -97,102 +70,85 @@ void printString(uint16_t xCoord, uint16_t yCoord, char* myString, int color)
 } // printString()
 
 
-enum States
+
+void send(char url[], char buffer[], uint16_t* count, int8 array[],
+	uint8_t* cycle_delay)
 {
-	TO,
-	SUBJECT,
-	MESSAGE
-};
+	GpioPut(P43, 0); // LED
+
+	sprintf(url, "http://calbeedemo.appspot.com/greetings?msg=%s", buffer);
+	WyzBeeWiFi_HttpGet(url, (HttpRequest*)NULL, array, sizeof(array));
+
+	buffer[0] = 0;
+	*count = 0;
+	*cycle_delay = MAX_DELAY + 1;
+	GpioPut(P43, 1); // LED
+} // send()
 
 
 
 int main(void)
 {
-	err_t err;
-	sys_ticks_init();																				/*Initialize Systick timer*/
-	GpioInitOut(P42, 1); // RED LED
-	GpioInitOut(P43, 1); // ? LED
+	sys_ticks_init();
 
-	// Initialize the OLED display according to Lab1
-	err_t SPIErr = WyzBeeSpi_Init(&config_stc); //initialize spi
-	
-	status = WyzBeeWiFi_Init(); // Wifi
-	memset(scan_dev,'\0',sizeof(scan_dev));
-  int8 array[64];
+	GpioInitOut(P42, 1); // RED LED
+	GpioInitOut(P43, 1); // GREEN LED
+
+	WyzBeeSpi_Init(&config_stc); //initialize spi for oled
 	
 	//OLED
 	oled.begin(); //OLED screen Initialization
 	oled.fillScreen(BLACK); //@fills the OLED screen with black pixels
 	oled.setTextSize(1); //OLED set text size
-	printToOLED("It's alive", RED, 0,0);
 
-	//char URL[128] = "http://calbeedemo.appspot.com/greetings?msg=HELLO_2";
-	
-	//uint8_t state = 0;
-	int cycle_delay = 0;
 
 	// Chat
 	char chat_log[CHAT_LEN][64];
-	int chat_head, chat_tail;
+	int chat_head, chat_tail, prev_tail;
 	chat_head = chat_tail = 0;
+	prev_tail = -1;
 	char chat_buffer[512];
-	
+	int not_same; 
+	int chat_index;
+	int buffer_index = 0;
 
-	if(status == 0) 
+	// User interface
+	uint32_t delay;
+	uint8_t cycle_delay = MAX_DELAY + 1;
+	char buffer[1024];
+	buffer[0] = 0;
+	char string[64];
+	uint16_t count = 0;
+	char character = 'A';
+
+	// Web and internet
+	int8 array[1024];
+	char url[256];
+
+	
+	memset(scan_dev,0,sizeof(scan_dev));
+	status = WyzBeeWiFi_Init(); // Wifi
+
+	if(status == 0) // if wifi init success
 	{
 		oled.fillScreen(BLACK);
-		printToOLED("initted", RED, 0,0);
+		printString(0,0, "Conneting...", RED);
 
 		nbr_scan_devs = WyzBeeWiFi_ScanNetworks(remote_dev);
-		for (ix = 0; ix < nbr_scan_devs; ix++)
+		for(ix=0; ix<nbr_scan_devs; ix++)
 			memcpy(scan_dev[ix], remote_dev[ix].ssid,
-				strlen ((const int8 *)remote_dev[ix].ssid));
+				strlen((const int8 *)remote_dev[ix].ssid));
 
-		status = WyzBeeWiFi_ConnectAccessPoint((int8 *)"Bacon", "nahtanojoat"); //join with access point
-		//status = WyzBeeWiFi_ConnectAccessPoint((int8 *)"EEC172", 0); //join with access point
+ 		//join with access point
+		status = WyzBeeWiFi_ConnectAccessPoint((int8 *)"Bacon", "nahtanojoat");
+		//status = WyzBeeWiFi_ConnectAccessPoint((int8 *)"EEC172", 0);
 
-		if (status == 0)
+		if (status == 0) // if connected to WiFi
 		{
-			printToOLED("conneted", RED, 0,0);
+			printString(0,0, "Conneted", RED);
 			infrared_init();
-			printToOLED("IR initted", RED, 0,0);
-			//status = WyzBeeWiFi_HttpGet(URL, (HttpRequest*)NULL, array, sizeof(array));
 
-			//printToOLED("posted", RED, 0,0);
-
-			char buffer[1024];
-			buffer[0] = 0;
-
-			uint32 delay;
-			int8 array[1024];
-
-			char string[64];
-			char character = 'A';
-			int count = 0;
-
-			//char URL[128] = "http://calbeedemo.appspot.com/greetings?msg=TESTING...";
-			char url[128];
-			char to_str[64];
-			char subject_str[64];
-
-/*
-			//HttpRequest http_req;
-			uint8  p_username[64] = "jgtao";
-			uint8  p_password[64] = "embeddedsystem";
-			uint8  p_headers[1024] =
-				"Accept: application/json\r\n"
-				"Content-Type: application/json\r\n"
-				"X-Postmark-Server-Token: 8e7246db-7f94-41e0-98bd-c95f09ce4643\r\n\r\n";
-			uint8  p_data[1024] = "\0";
-
-			http_req.p_username = NULL;//p_username;
-			http_req.p_password = NULL;//p_password;
-			http_req.p_headers = p_headers;
-			http_req.p_data = p_data;
-*/
-			int16 ret;
 			oled.fillScreen(BLACK);
-
 			printString(0,119,">A", BLUE);
 
 			for(;;)
@@ -201,97 +157,126 @@ int main(void)
 				{
 					switch(key.cmd)
 					{
-						case 0x0C: character--; break; // up
-						case 0x0D: character++; break; // down
+						case 0x0C: // up
+							if(character == 34) character = 126;
+							else character--;
+							break;
+						case 0x0D: // down
+							if(character == 126) character = 33;
+							else character++;
+							break;
 						case 0x02: // right
-							buffer[count] = character;
-							count++;
+							buffer[count++] = character;
 						 	buffer[count] = 0;
 						 	break;
 						case 0x03: // left
 							if(count == 0) break;
-							buffer[count-1] = 0;
-							count--;
+							else buffer[--count] = 0;
 							break;
-						case 0x15: // 5 (space)
-							buffer[count] = '%';
-							count++;
-							buffer[count] = '2';
-							count++;
-							buffer[count] = '0';
-							count++;
+						case 0x10: // 0 (space)
+							buffer[count++] = '%';
+							buffer[count++] = '2';
+							buffer[count++] = '0';
 							buffer[count] = 0;
 							break;
-						case 0x04C:
-							GpioPut(P43, 0); // LED
-							buffer[count] = character;
-							buffer[count+1] = 0;
-							count++;
-							sprintf(url,"http://calbeedemo.appspot.com/greetings?msg=%s", buffer);
-							WyzBeeWiFi_HttpGet(url, (HttpRequest*)NULL, array, sizeof(array));
-
-							printString(0,119,"                             ", BLUE);
-							cycle_delay = 21;
-
-							buffer[0] = 0;
-							count = 0;
-							GpioPut(P43, 1); // LED
+						case 0x4C: // OK
+							buffer[count++] = character;
+							buffer[count] = 0;
+							send(url, buffer, &count, array, &cycle_delay);
 							break;
+						case 0x11: //1
+							strcpy(buffer, "Yes.");
+							send(url, buffer, &count, array, &cycle_delay);
+							break;
+						case 0x12: // 2
+							strcpy(buffer, "No.");
+							send(url, buffer, &count, array, &cycle_delay);
+							break;
+						case 0x13: // 3
+							strcpy(buffer, ":)");
+							send(url, buffer, &count, array, &cycle_delay);
+							break;
+						case 0x14: // 4
+							strcpy(buffer, ":(");
+							send(url, buffer, &count, array, &cycle_delay);
+							break;
+						case 0x15: // 5
+							strcpy(buffer, "Hello");
+							send(url, buffer, &count, array, &cycle_delay);
+							break;
+						case 0x16: // 6
+							strcpy(buffer, "Goodbye");
+							send(url, buffer, &count, array, &cycle_delay);
+							break;
+						case 0x17: // 6
+							strcpy(buffer,"How%20is%20the%20weather?");
+							send(url, buffer, &count, array, &cycle_delay);
+							break;
+						case 0x18: // 7
+							strcpy(buffer,"Sent%20from%20an%20Embedded%20System");
+							send(url, buffer, &count, array, &cycle_delay);
+							break;
+						case 0x19: // 8
+							strcpy(buffer,"ALL%20YOUR%20BASE%20ARE%20BELONG%20TO%20US");
+							send(url, buffer, &count, array, &cycle_delay);
+							break;
+							
 					}; // swith key.cmd
 
-					sprintf(string,">%s%c  ", buffer, character);
+					sprintf(string,">%s%c                           ", buffer, character);
 					printString(0,119,string, BLUE);
+
+					//sprintf(string, "k:%x", key.cmd); printString(0,100,string, GREEN);
 				} // if pressing
 
 
-				// Print chat
-				if(cycle_delay > 20 || key.cmd == 0x10 && key.pressing)
+				// Print chat after period or GUIDE key is pressed
+				if(cycle_delay > MAX_DELAY || (key.cmd == 0x25 && key.pressing))
 				{
 					GpioPut(P42, 0); // LED
 					strcpy(url, "http://calbeedemo.appspot.com/status");
-					//sprintf(url,"http://calbeedemo.appspot.com/greetings?msg=%s", "HERLLOWORDL");
 					memset(array, 0, sizeof (array));
-					status = WyzBeeWiFi_HttpGet(url, (HttpRequest*)NULL, array, sizeof(array));
+					status = WyzBeeWiFi_HttpGet(url, (HttpRequest*)NULL, array,
+						sizeof(array));
+					strcpy(array,&array[12]);
 
-					strcpy(chat_log[chat_tail], array);
-					chat_tail = (chat_tail++) % CHAT_LEN;
-					if(chat_tail == chat_head) chat_head = (chat_head++) % CHAT_LEN;
-					
-					int chat_index;
-					int buffer_index = 0;
-					int str_num;
-					memset(chat_buffer, 0, sizeof(chat_buffer));
+					if(prev_tail != -1)
+						not_same = strcmp(array,chat_log[prev_tail]);
+					else
+						not_same = 1;
 
-					for(chat_index = chat_head; chat_index != chat_tail;
-						chat_index= (chat_index++) % CHAT_LEN)
+					if(not_same)
 					{
-						strcpy(chat_buffer+buffer_index, chat_log[chat_index]);
-						buffer_index += strlen(chat_log[chat_index]) + 1; // add 1 for \n
-						chat_buffer[buffer_index] = '\n';
-					} // for every message
-					//chat_buffer[buffer_index] = 0; // end buffer
-					//printString(0,0,array, RED);
-					printString(0,0,chat_buffer, RED);
+						strcpy(chat_log[chat_tail], array);
+						chat_tail = (chat_tail+1) % CHAT_LEN;
+						prev_tail = (prev_tail+1) % CHAT_LEN;
+						if(chat_tail == chat_head) chat_head = (chat_head+1) % CHAT_LEN;
+						
+						buffer_index = 0;
+						memset(chat_buffer, 0, sizeof(chat_buffer));
+
+						for(chat_index = chat_head; chat_index != chat_tail;
+							chat_index= (chat_index+1) % CHAT_LEN)
+						{
+							strcpy(chat_buffer+buffer_index, chat_log[chat_index]);
+							buffer_index += strlen(chat_log[chat_index]);
+							// string already ends a newline followed by a null termination
+						}
+						oled.fillRect(0, 0, 64, 118, BLACK); // background
+						printString(0,0,chat_buffer, WHITE);
+					} // if new message
 
 					cycle_delay = 0;
 					GpioPut(P42, 1); // LED
-				}
+				} // get message
 				else
 				{
 					cycle_delay++;
-					for(delay=0;delay<0x3FFFFF;delay++); // delayelay
-				}
-
+					for(delay=0;delay<0x7FF000;delay++); // delayelay
+				} // don't get message
 			} // main loop
-
 		} // if connected
-		printToOLED("connet failed", RED, 0,0);
+		printString(0,0, "Connet Failed", RED);
 	} // if status
 	return 0;
 } // main()
-	
-/*
- *********************************************************************************************************
- *                                           END
- *********************************************************************************************************
- */
