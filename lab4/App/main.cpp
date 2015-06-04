@@ -122,7 +122,7 @@ int main(void)
 	char character = 'A';
 
 	// Web and internet
-	int8 array[1024];
+	int8 array[3000];
 	char url[256];
 
 	
@@ -140,9 +140,14 @@ int main(void)
 				strlen((const int8 *)remote_dev[ix].ssid));
 
  		//join with access point
-		status = WyzBeeWiFi_ConnectAccessPoint((int8 *)"Bacon", "nahtanojoat");
-		//status = WyzBeeWiFi_ConnectAccessPoint((int8 *)"EEC172", 0);
+		//status = WyzBeeWiFi_ConnectAccessPoint((int8 *)"Bacon", "nahtanojoat");
+		status = WyzBeeWiFi_ConnectAccessPoint((int8 *)"EEC172", 0);
 
+		
+		
+int number_nl;
+char tmp_number[64];
+		
 		if (status == 0) // if connected to WiFi
 		{
 			printString(0,0, "Conneted", RED);
@@ -205,7 +210,17 @@ int main(void)
 							send(url, buffer, &count, array, &cycle_delay);
 							break;
 						case 0x16: // 6
-							strcpy(buffer, "Goodbye");
+							//strcpy(url, "http://api.openweathermap.org/data/2.5/weather?zip=95616,us");
+							strcpy(tmp_number,chat_log[prev_tail]);
+							number_nl = strlen(chat_log[prev_tail]) - 1;
+							tmp_number[number_nl] = 0;
+							sprintf(url, "http://numbersapi.com/%s", tmp_number);
+							memset(array, 0, sizeof (array));
+							status = WyzBeeWiFi_HttpGet(url, (HttpRequest*)NULL, array,
+								sizeof(array));
+							printString(0,60,array, GREEN); for(delay=0;delay<0xFFFFFFF;delay++); // delayelay
+						
+							strcpy(buffer, "I'm%20reading%20about%20numbers!");
 							send(url, buffer, &count, array, &cycle_delay);
 							break;
 						case 0x17: // 6
